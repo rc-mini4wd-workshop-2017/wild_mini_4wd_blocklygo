@@ -1,0 +1,331 @@
+<html>
+<head>
+<!-- <title>ミニ四駆 ブロックプログラミング</title> -->
+<title>Mini4wd Programing</title>
+<link href="static/css/bootstrap.min.css" rel="stylesheet" />
+<script type="text/javascript" src="static/js/jquery.js"></script>
+<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="static/js/acorn_interpreter.js"></script>
+<script type="text/javascript" src="static/js/blockly_compressed.js"></script>
+<script type="text/javascript" src="static/js/blocks_compressed.js"></script>
+<script type="text/javascript" src="static/js/javascript_compressed.js"></script>
+<script type="text/javascript" src="static/js/blocks/webapi.js"></script>
+<script type="text/javascript" src="static/js/generators/javascript/webapi.js"></script>
+<script type="text/javascript" src="static/js/blocks/my_text.js"></script>
+<script type="text/javascript" src="static/js/generators/javascript/my_text.js"></script>
+<script type="text/javascript" src="static/js/msg/js/en.js"></script>
+<script type="text/javascript" src="static/js/wait_block.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarItems">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+<!--      <a class="navbar-brand" href="#">ミニ四駆 ブロックプログラミング</a> -->
+      <a class="navbar-brand" href="#">Mini4wd Programing</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarItems">
+      <ul class="nav navbar-nav">
+        <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#file">File</a></li>
+        <li class="nav-item"><a class="nav-link" href="#help">Help</a></li>
+      </ul>
+      <div class="navbar-right">
+        <img alt="Mini4WD01" src="static/img/PPGreen.png" style="height: 50px;" />
+        <img alt="Mini4WD02" src="static/img/PPRed.png" style="height: 40px;" />
+        <img alt="Mini4WD03" src="static/img/PPBlue.png" style="height: 30px;" />
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+
+<div class="row">
+<h2>Let's try</h2>
+<div class="col-sm-2">
+<button onclick="runCode()" id="runButton" class="btn btn-primary btn-block">Run</button>
+</div>
+<div class="col-sm-2">
+<button onclick="stopCode()" id="stopButton" class="btn btn-danger btn-block">Stop</button>
+</div>
+</div>
+
+<div class="row">
+  <div id="blocklyDiv" style="height: 480px;" class="col-sm-8"></div>
+  <div class="col-sm-4">
+    <textarea id="output" readonly class="form-control"
+              style="display: inline-block; height: 480px;">
+    </textarea>
+  </div>
+</div>
+<!--
+<div class="row">
+<h2 id="file">File</h2>
+<div class="col-sm-2">
+  <a id="saveCode" class="btn btn-primary btn-block" download="brain.xml" onclick="saveCode()">Save</a>
+</div>
+<div class="col-sm-2">
+  <label class="btn btn-danger btn-file btn-block">
+    Load
+    <input id="loadCode" class="custom-file-input" type="file" onchange="loadCode()" style="display:none"></input>
+  </label>
+</div>
+</div>
+
+<div class="row">
+<h2 id="help">Help</h2>
+</div>
+
+</div>
+-->
+
+<xml id="toolbox" style="display: none">
+  <category name="Logic">
+    <block type="controls_if"></block>
+    <block type="logic_compare"></block>
+    <block type="logic_operation"></block>
+    <block type="logic_negate"></block>
+    <block type="logic_boolean"></block>
+  </category>
+
+  <category name="Text">
+    <block type="text"></block>
+    <block type="text_length"></block>
+    <block type="text_print"></block>
+    <block type="text_prompt_ext">
+      <value name="TEXT">
+        <block type="text"></block>
+      </value>
+    </block>
+    <block type="mytext_isInclude">
+      <value name="FIND">
+        <block type="text">
+          <field name="TEXT">keyword</field>
+        </block>
+      </value>
+    </block>
+  </category>
+  <category name="Time">
+    <block type="wait_seconds"></block>
+  </category>
+  
+  <!-- *** Straight Block *** -->
+  <category name="Straight">
+    <block type="webapi_straight">
+    </block>
+  </category>
+
+  <!-- *** Turn Block *** -->
+  <category name="Turn">
+    <block type="webapi_turnright">
+    </block>
+    <block type="webapi_turnleft">
+    </block>
+  </category>
+
+  <category name="WebAPI">
+    <block type="webapi_echo">
+      <value name="TEXT">
+        <block type="text">
+          <field name="TEXT">Hello World</field>
+        </block>
+      </value>
+    </block>
+    
+    <block type="webapi_info"></block>
+    <block type="webapi_ledon"></block>
+    <block type="webapi_ledoff"></block>
+
+    <block type="webapi_write_serial">
+      <value name="msg">
+        <block type="text">
+          <field name="TEXT">Hello World</field>
+        </block>
+      </value>
+    </block>
+    <block type="webapi_read_serial"></block>
+    <block type="webapi_rebooter"></block>
+    <block type="webapi_switcher">
+      <value name="msg">
+        <block type="text">
+          <field name="TEXT">0</field>
+        </block>
+      </value>
+    </block>
+  </category>
+</xml>
+
+<script>
+  var workspacePlayground = Blockly.inject('blocklyDiv',
+    {toolbox: document.getElementById('toolbox')});
+
+  // Exit is used to signal the end of a script.
+  Blockly.JavaScript.addReservedWords('exit');
+
+  var outputArea    = document.getElementById('output');
+  var runButton     = document.getElementById('runButton');
+  var myInterprpeter = null;
+  var runner;
+
+  // for Webapi window.alert()
+  function alert(text) {
+    text = text ? text.toString() : '';
+    outputArea.value += '\n' + text;
+  }
+
+  function initApi(interpreter, scope) {
+    // Add an API function for the alert() block, generated for "text_print" blocks.
+    var wrapper = function(text) {
+      text = text ? text.toString() : '';
+      outputArea.value = outputArea.value + '\n' + text;
+    };
+    interpreter.setProperty(scope, 'alert',
+        interpreter.createNativeFunction(wrapper));
+
+    // Add an API function for the prompt() block.
+    var wrapper = function(text) {
+      text = text ? text.toString() : '';
+      return interpreter.createPrimitive(prompt(text));
+    };
+    interpreter.setProperty(scope, 'prompt',
+        interpreter.createNativeFunction(wrapper));
+
+    // Add an API function for $.ajax
+    interpreter.setProperty(scope, '$', scope, Interpreter.READONLY_DESCRIPTOR);
+    var wrapper = function(options) {
+      options = options ? interpreter.pseudoToNative(options) : undefined;
+      return interpreter.createPrimitive($.ajax(options));
+    };
+    interpreter.setProperty(scope, 'ajax',
+        interpreter.createNativeFunction(wrapper));
+
+    // Add an API for the wait block.  See wait_block.js
+    initInterpreterWaitForSeconds(interpreter, scope);
+
+    // Add an API for the webapi blocks.  See webapi.js
+    initInterpreterWebapi(interpreter, scope);
+  
+    // Add an API function for highlighting blocks.
+    var wrapper = function(id) {
+      id = id ? id.toString() : '';
+      return interpreter.createPrimitive(highlightBlock(id));
+    };
+    interpreter.setProperty(scope, 'highlightBlock',
+        interpreter.createNativeFunction(wrapper));
+  }
+
+  var highlightPause = false;
+  var latestCode = '';
+
+  function highlightBlock(id) {
+    workspacePlayground.highlightBlock(id);
+    highlightPause = true;
+  }
+
+  function resetStepUi(clearOutput) {
+    workspacePlayground.highlightBlock(null);
+    highlightPause = false;
+    runButton.disabled = '';
+
+    if (clearOutput) {
+      outputArea.value = 'Program output:\n=================';
+    }
+  }
+
+  function generateCodeAndLoadIntoInterpreter() {
+    // Generate JavaScript code and parse it.
+    Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+    Blockly.JavaScript.addReservedWords('highlightBlock');
+    latestCode = Blockly.JavaScript.workspaceToCode(workspacePlayground);
+
+    resetStepUi(true);
+  }
+
+  function resetInterpreter() {
+    myInterpreter = null;
+    if (runner) {
+      clearTimeout(runner);
+      runner = null;
+    }
+  }
+
+  function saveCode() {
+    var xml = Blockly.Xml.workspaceToDom(workspacePlayground);
+    var xml_text = Blockly.Xml.domToText(xml);
+    var e = document.getElementById("saveCode");
+    e.href = "data:application/octet-stream;charset=utf-8," + encodeURIComponent(xml_text);
+    return true;
+  }
+
+  function loadCode() {
+    var fs = document.getElementById("loadCode").files;
+    var f = fs[0];
+    var reader = new FileReader();
+    reader.onload = function() {
+      var xml = Blockly.Xml.textToDom(reader.result);
+      Blockly.Xml.domToWorkspace(xml, workspacePlayground);
+    };
+    reader.readAsText(f);
+  }
+
+  function runCode() {
+    if (!myInterpreter) {
+      // First statement of this code.
+      // Clear the program output.
+      resetStepUi(true);
+      runButton.disabled = 'disabled';
+
+      // And then show generated code in an alert.
+      // In a timeout to allow the outputArea.value to reset first.
+      setTimeout(function() {
+        // Begin execution
+        highlightPause = false;
+        myInterpreter = new Interpreter(latestCode, initApi);
+        runner = function() {
+          if (myInterpreter) {
+            var hasMore = myInterpreter.run();
+            if (hasMore) {
+              // Execution is currently blocked by some async call.
+              // Try again later.
+              setTimeout(runner, 10);
+            } else {
+              // Program is complete.
+              outputArea.value += '\n\n<< Program complete >>';
+              resetInterpreter();
+              resetStepUi(false);
+            }
+          }
+        };
+        runner();
+      }, 1);
+      return;
+    }
+  }
+
+  function stopCode() {
+    resetInterpreter();
+    resetStepUi(false);
+    outputArea.value += '\n\n<< Program interrupted >>';
+  }
+
+  // Load the interpreter now, and upon future changes.
+  generateCodeAndLoadIntoInterpreter();
+  workspacePlayground.addChangeListener(function(event) {
+    if (!(event instanceof Blockly.Events.Ui)) {
+      // Something changed. Parser needs to be reloaded.
+      resetInterpreter();
+      generateCodeAndLoadIntoInterpreter();
+    }
+  });
+</script>
+
+</body>
+</html>
