@@ -15,7 +15,6 @@ import (
 
 const (
 	discard_timeout = time.Millisecond * 10
-	command_timeout = time.Second * 10
 )
 
 type Command struct {
@@ -71,7 +70,7 @@ func (c *Command) Close() (err error) {
 //  - command[in] "info", "log", etc...
 //  - result[out] command result(0, 1, etc...)
 //  - body[out]   command body
-func (c *Command) Execute(command string) (result int, body string, err error) {
+func (c *Command) Execute(command string, timeout time.Duration) (result int, body string, err error) {
 	_, err = c.port.Write([]byte(command + "\n"))
 	if err != nil {
 		log.Printf("command: %v", err)
@@ -89,7 +88,7 @@ func (c *Command) Execute(command string) (result int, body string, err error) {
 		case err = <-c.line.Err:
 			log.Printf("command: %v", err)
 			return 0, body, err
-		case <-time.After(command_timeout):
+		case <-time.After(timeout):
 			return result, body, errors.New("Timeout")
 		}
 

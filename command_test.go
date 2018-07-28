@@ -25,7 +25,7 @@ func finalize() {
 }
 
 func TestInvalidCommand(t *testing.T) {
-	result, body, err := serialCommand.Execute("unvalid_command")
+	result, body, err := serialCommand.Execute("unvalid_command", time.Second)
 	if err != nil {
 		t.Fatalf("info Execute() returns err: %v", err)
 	}
@@ -36,7 +36,7 @@ func TestInvalidCommand(t *testing.T) {
 }
 
 func testNormalCommand(t *testing.T, command string) {
-	result, body, err := serialCommand.Execute(command)
+	result, body, err := serialCommand.Execute(command, time.Second)
 	if err != nil {
 		t.Fatalf("%s Execute() returns err: %v", command, err)
 	}
