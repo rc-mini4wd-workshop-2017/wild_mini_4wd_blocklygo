@@ -46,6 +46,17 @@ func testNormalCommand(t *testing.T, command string) {
 	fmt.Println(body)
 }
 
+func testLongTimeCommand(t *testing.T, command string, timeout time.Duration) {
+	result, body, err := serialCommand.Execute(command, timeout)
+	if err != nil {
+		t.Fatalf("%s Execute() returns err: %v", command, err)
+	}
+	if result != 0 {
+		t.Fatalf("%s Execute() result(expected 0, actual %d)", command, result)
+	}
+	fmt.Println(body)
+}
+
 func TestInfoCommand(t *testing.T) {
 	testNormalCommand(t, "info")
 }
@@ -88,6 +99,24 @@ func TestSetServoCommand(t *testing.T) {
 	// forward
 	testNormalCommand(t, "set_servo 90")
 	time.Sleep(time.Second)
+}
+
+func TestGetDistanceCommand(t *testing.T) {
+	result, body, err := serialCommand.Execute("get_distance", time.Second)
+	if err != nil {
+		t.Fatalf("get_distance Execute() returns err: %v", err)
+	}
+	fmt.Printf("distance = %d\n", result)
+	fmt.Println(body)
+}
+
+func TestDriveMotorCommand(t *testing.T) {
+	testLongTimeCommand(t, "drive_motor 61", time.Second*3)
+	testLongTimeCommand(t, "drive_motor 62", time.Second*3)
+	testLongTimeCommand(t, "drive_motor 61 UNTIL_NEAR", time.Second*20)
+	testLongTimeCommand(t, "drive_motor 62 UNTIL_NEAR", time.Second*20)
+	testLongTimeCommand(t, "drive_motor 61 UNTIL_BUMPER", time.Second*20)
+	testLongTimeCommand(t, "drive_motor 62 UNTIL_BUMPER", time.Second*20)
 }
 
 func TestMain(m *testing.M) {
