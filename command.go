@@ -5,6 +5,7 @@
 package main
 
 import (
+	"errors"
 	"github.com/tarm/serial"
 	"log"
 	"regexp"
@@ -12,32 +13,51 @@ import (
 	"time"
 )
 
+const (
+	discard_timeout = time.Millisecond * 10
+	command_timeout = time.Second * 10
+)
+
 type Command struct {
 	port *serial.Port
+	line *ReadlineChannel
+}
+
+func openCommand(device string, name string) (*Command, error) {
+	c := &serial.Config{Name: device, Baud: 115200}
+	port, err := serial.OpenPort(c)
+	if err != nil {
+		log.Printf("%s: %v\n", name, err)
+		return nil, err
+	}
+	log.Printf("%s: open\n", name)
+
+	line := NewReadlineChannel(port, name)
+	command := &Command{port: port, line: line}
+	command.discardReadBuffer()
+	return command, nil
 }
 
 // Open bluetooth command
 func OpenBluetoothCommand() (*Command, error) {
-	c := &serial.Config{Name: "/dev/rfcomm0", Baud: 115200}
-	port, err := serial.OpenPort(c)
-	if err != nil {
-		log.Printf("bluetooth: %v\n", err)
-		return nil, err
-	}
-	log.Printf("bluetooth: open\n")
-	return &Command{port}, nil
+	return openCommand("/dev/rfcomm0", "bluetooth")
 }
 
 // Open serial command
 func OpenSerialCommand() (*Command, error) {
-	c := &serial.Config{Name: "/dev/ttyUSB0", Baud: 115200}
-	port, err := serial.OpenPort(c)
-	if err != nil {
-		log.Printf("serial: %v\n", err)
-		return nil, err
+	return openCommand("/dev/ttyUSB0", "serial")
+}
+
+func (c *Command) discardReadBuffer() error {
+	for {
+		select {
+		case <-c.line.C:
+		case <-c.line.Err:
+			return nil
+		case <-time.After(discard_timeout):
+			return errors.New("Timeout")
+		}
 	}
-	log.Printf("serial: open\n")
-	return &Command{port}, nil
 }
 
 // Close command
@@ -47,9 +67,10 @@ func (c *Command) Close() (err error) {
 
 // Execute command
 //
-// command: info, log, etc...
-// result:  0, 1, etc...
-// body:    command message
+// Args:
+//  - command[in] "info", "log", etc...
+//  - result[out] command result(0, 1, etc...)
+//  - body[out]   command body
 func (c *Command) Execute(command string) (result int, body string, err error) {
 	_, err = c.port.Write([]byte(command + "\n"))
 	if err != nil {
@@ -57,22 +78,23 @@ func (c *Command) Execute(command string) (result int, body string, err error) {
 		return 0, body, err
 	}
 
-	buf := make([]byte, 128)
 	r := regexp.MustCompile("result: (.*)\n")
 	for {
 		time.Sleep(time.Millisecond * 20)
 
-		var n int
-		n, err = c.port.Read(buf)
-		if err != nil {
+		select {
+		case line := <-c.line.C:
+			body += line
+			body += "\n"
+		case err = <-c.line.Err:
 			log.Printf("command: %v", err)
 			return 0, body, err
+		case <-time.After(command_timeout):
+			return result, body, errors.New("Timeout")
 		}
-		body = body + string(buf[:n])
 
 		match := r.FindStringSubmatch(body)
 		if len(match) != 0 {
-			log.Print(body)
 			result, err = strconv.Atoi(match[1])
 			return
 		}
