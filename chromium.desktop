@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Chromium
+Exec=chromium-browser --app=http://localhost:8080 --start-fullscreen
+Terminal=false
+

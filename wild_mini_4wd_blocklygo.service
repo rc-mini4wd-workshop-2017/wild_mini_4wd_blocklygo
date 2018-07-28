@@ -1,0 +1,11 @@
+[Unit]
+Description=wild_mini_4wd_blocklygo
+
+[Service]
+ExecStart=/home/pi/workspace/wild_mini_4wd_blocklygo/wild_mini_4wd_blocklygo
+WorkingDirectory=/home/pi/workspace/wild_mini_4wd_blocklygo
+Restart=always
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
