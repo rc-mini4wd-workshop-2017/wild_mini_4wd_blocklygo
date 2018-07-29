@@ -17,12 +17,12 @@ const (
 	discard_timeout = time.Millisecond * 10
 )
 
-type Command struct {
+type CommandIO struct {
 	port *serial.Port
 	line *ReadlineChannel
 }
 
-func openCommand(device string, name string) (*Command, error) {
+func openCommandIO(device string, name string) (*CommandIO, error) {
 	c := &serial.Config{Name: device, Baud: 115200}
 	port, err := serial.OpenPort(c)
 	if err != nil {
@@ -32,22 +32,22 @@ func openCommand(device string, name string) (*Command, error) {
 	log.Printf("%s: open\n", name)
 
 	line := NewReadlineChannel(port, name)
-	command := &Command{port: port, line: line}
+	command := &CommandIO{port: port, line: line}
 	command.discardReadBuffer()
 	return command, nil
 }
 
-// Open bluetooth command
-func OpenBluetoothCommand() (*Command, error) {
-	return openCommand("/dev/rfcomm0", "bluetooth")
+// Open bluetooth command IO
+func OpenBluetoothCommandIO() (*CommandIO, error) {
+	return openCommandIO("/dev/rfcomm0", "bluetooth")
 }
 
-// Open serial command
-func OpenSerialCommand() (*Command, error) {
-	return openCommand("/dev/ttyUSB0", "serial")
+// Open serial command IO
+func OpenSerialCommandIO() (*CommandIO, error) {
+	return openCommandIO("/dev/ttyUSB0", "serial")
 }
 
-func (c *Command) discardReadBuffer() error {
+func (c *CommandIO) discardReadBuffer() error {
 	for {
 		select {
 		case <-c.line.C:
@@ -59,18 +59,18 @@ func (c *Command) discardReadBuffer() error {
 	}
 }
 
-// Close command
-func (c *Command) Close() (err error) {
+// Close command IO
+func (c *CommandIO) Close() (err error) {
 	return c.port.Close()
 }
 
-// Execute command
+// Execute command IO
 //
 // Args:
 //  - command[in] "info", "log", etc...
 //  - result[out] command result(0, 1, etc...)
 //  - body[out]   command body
-func (c *Command) Execute(command string, timeout time.Duration) (result int, body string, err error) {
+func (c *CommandIO) Execute(command string, timeout time.Duration) (result int, body string, err error) {
 	_, err = c.port.Write([]byte(command + "\n"))
 	if err != nil {
 		log.Printf("command: %v", err)

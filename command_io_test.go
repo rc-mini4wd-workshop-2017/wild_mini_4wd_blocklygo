@@ -11,11 +11,11 @@ import (
 	"time"
 )
 
-var serialCommand *Command
+var serialCommand *CommandIO
 
 func initialize() {
 	var err error
-	serialCommand, err = OpenSerialCommand()
+	serialCommand, err = OpenSerialCommandIO()
 	if err != nil {
 		fmt.Println("error: open serial")
 	}
