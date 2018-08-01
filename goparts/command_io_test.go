@@ -112,7 +112,10 @@ func testLongTimeCommand(t *testing.T, command string, timeout time.Duration) {
 }
 
 // Timeout Test:
-//   env TEST_IO_MODE=bluetooth go test -count 1000 -run "TestInfoCommand"
+//   $ env TEST_IO_MODE=bluetooth go test -timeout 60m -count 10000 -run "TestInfoCommand"
+//   PASS
+//   ok      _/home/pi/workspace/wild_mini_4wd_blocklygo/goparts     1787.138s
+//
 func TestInfoCommand(t *testing.T) {
 	testNormalCommand(t, "info")
 }
