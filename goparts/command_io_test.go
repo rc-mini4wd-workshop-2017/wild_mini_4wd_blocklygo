@@ -7,25 +7,35 @@ package goparts
 import (
 	"fmt"
 	"os"
+	"strings"
 	"testing"
 	"time"
 )
 
-var serialCommand *CommandIO
+var testSerialCommand *CommandIO
 
-func initialize() {
+func initializeSerial() {
 	var err error
-	serialCommand, err = OpenSerialCommandIO()
+	testSerialCommand, err = OpenSerialCommandIO()
 	if err != nil {
 		fmt.Println("error: open serial")
 	}
 }
+
+func initializeBluetooth() {
+	var err error
+	testSerialCommand, err = OpenBluetoothCommandIO()
+	if err != nil {
+		fmt.Println("error: open bluetooth")
+	}
+}
+
 func finalize() {
-	serialCommand.Close()
+	testSerialCommand.Close()
 }
 
 func TestInvalidCommand(t *testing.T) {
-	result, body, err := serialCommand.Execute("unvalid_command", time.Second)
+	result, body, err := testSerialCommand.Execute("unvalid_command", time.Second)
 	if err != nil {
 		t.Fatalf("info Execute() returns err: %v", err)
 	}
@@ -36,7 +46,7 @@ func TestInvalidCommand(t *testing.T) {
 }
 
 func testNormalCommand(t *testing.T, command string) {
-	result, body, err := serialCommand.Execute(command, time.Second)
+	result, body, err := testSerialCommand.Execute(command, time.Second)
 	if err != nil {
 		t.Fatalf("%s Execute() returns err: %v", command, err)
 	}
@@ -47,7 +57,7 @@ func testNormalCommand(t *testing.T, command string) {
 }
 
 func testLongTimeCommand(t *testing.T, command string, timeout time.Duration) {
-	result, body, err := serialCommand.Execute(command, timeout)
+	result, body, err := testSerialCommand.Execute(command, timeout)
 	if err != nil {
 		t.Fatalf("%s Execute() returns err: %v", command, err)
 	}
@@ -102,7 +112,7 @@ func TestSetServoCommand(t *testing.T) {
 }
 
 func TestGetDistanceCommand(t *testing.T) {
-	result, body, err := serialCommand.Execute("get_distance", time.Second)
+	result, body, err := testSerialCommand.Execute("get_distance", time.Second)
 	if err != nil {
 		t.Fatalf("get_distance Execute() returns err: %v", err)
 	}
@@ -119,11 +129,37 @@ func TestDriveMotorCommand(t *testing.T) {
 	testLongTimeCommand(t, "drive_motor 62 UNTIL_BUMPER", time.Second*20)
 }
 
+// Example:
+//   env TEST_MODES=serial go test
+//   env TEST_MODES=bluetooth go test
+//   env TEST_MODES=serial:bluetooth go test
 func TestMain(m *testing.M) {
-	initialize()
-	ret := m.Run()
-	if ret == 0 {
-		finalize()
+	if len(os.Getenv("TEST_MODES")) == 0 {
+		fmt.Printf("skip test bacause of no TEST_MODES.\n")
+		fmt.Printf("\n")
+		fmt.Printf("Example:\n")
+		fmt.Printf("  env TEST_MODES=serial go test\n")
+		fmt.Printf("  env TEST_MODES=bluetooth go test\n")
+		fmt.Printf("  env TEST_MODES=serial:bluetooth go test\n")
+		os.Exit(0)
 	}
-	os.Exit(ret)
+	test_modes := strings.Split(os.Getenv("TEST_MODES"), ":")
+	fmt.Printf("TEST_MODES: %v\n", test_modes)
+	for _, mode := range test_modes {
+		switch mode {
+		case "bluetooth":
+			initializeBluetooth()
+		case "serial":
+			initializeSerial()
+		default:
+			fmt.Printf("unknown TEST_MODES: %v\n", mode)
+			os.Exit(1)
+		}
+		ret := m.Run()
+		finalize()
+		if ret != 0 {
+			os.Exit(ret)
+		}
+	}
+	os.Exit(0)
 }
