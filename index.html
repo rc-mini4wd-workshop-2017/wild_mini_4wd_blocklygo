@@ -49,7 +49,7 @@
 <div class="container-fluid">
 
 <div class="row">
-<h2>Let's try</h2>
+<!-- <h2>Let's try</h2> -->
 <div class="col-sm-2">
 <button onclick="runCode()" id="runButton" class="btn btn-primary btn-block">Run</button>
 </div>
@@ -96,30 +96,23 @@
     <block type="logic_boolean"></block>
   </category>
 
-  <category name="Text">
-    <block type="text"></block>
-    <block type="text_length"></block>
-    <block type="text_print"></block>
-    <block type="text_prompt_ext">
-      <value name="TEXT">
-        <block type="text"></block>
-      </value>
-    </block>
-    <block type="mytext_isInclude">
-      <value name="FIND">
-        <block type="text">
-          <field name="TEXT">keyword</field>
-        </block>
-      </value>
-    </block>
-  </category>
   <category name="Time">
     <block type="wait_seconds"></block>
   </category>
   
-  <!-- *** Straight Block *** -->
-  <category name="Straight">
-    <block type="webapi_straight">
+  <!-- *** Go Block *** -->
+  <category name="Go">
+    <block type="webapi_forward">
+    </block>
+    <block type="webapi_back">
+    </block>
+    <block type="webapi_stop">
+    </block>
+  </category>
+
+  <!-- *** Drive Block *** -->
+  <category name="Drive">
+    <block type="webapi_drive">
     </block>
   </category>
 
@@ -129,21 +122,23 @@
     </block>
     <block type="webapi_turnleft">
     </block>
+    <block type="webapi_turnfront">
+    </block>
   </category>
 
-  <category name="WebAPI">
-    <block type="webapi_echo">
-      <value name="TEXT">
-        <block type="text">
-          <field name="TEXT">Hello World</field>
-        </block>
-      </value>
+  <!-- *** Servo Block *** -->
+  <category name="Servo">
+    <block type="webapi_servo">
     </block>
-    
+  </category>
+
+  <category name="Other">   
     <block type="webapi_info"></block>
     <block type="webapi_ledon"></block>
     <block type="webapi_ledoff"></block>
+  </category>
 
+  <category name="WebAPI">
     <block type="webapi_write_serial">
       <value name="msg">
         <block type="text">
@@ -153,13 +148,6 @@
     </block>
     <block type="webapi_read_serial"></block>
     <block type="webapi_rebooter"></block>
-    <block type="webapi_switcher">
-      <value name="msg">
-        <block type="text">
-          <field name="TEXT">0</field>
-        </block>
-      </value>
-    </block>
   </category>
 </xml>
 

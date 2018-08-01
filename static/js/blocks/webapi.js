@@ -1,27 +1,3 @@
-
-Blockly.Blocks['webapi_echo'] = {
-  /**
-   * Block for webapi echo statement.
-   * @this Blockly.Block
-   */
-  init: function() {
-    this.jsonInit({
-      "message0": "echo %1",
-      "args0": [
-        {
-          "type": "input_value",
-          "name": "TEXT"
-        }
-      ],
-      "previousStatement": null,
-      "nextStatement": null,
-      "colour": 60,
-      "tooltip": "Execute Web API v1/echo",
-      "helpUrl": null
-    });
-  }
-};
-
 Blockly.Blocks['webapi_info'] = {
   /**
    * Block for webapi info statement.
@@ -77,30 +53,113 @@ Blockly.Blocks['webapi_ledoff'] = {
 };
 
 
-Blockly.Blocks['webapi_straight'] = {
+Blockly.Blocks['webapi_forward'] = {
   /**
-   * Block for webapi straight statement.
+   * Block for webapi forward statement.
    * @this Blockly.Block
    */
   init: function() {
     this.jsonInit({
-      "message0": "straight %1",
+      "message0": "forward %1",
       "args0": [
         {
           "type": "field_dropdown",
           "name": "command",
           "options": [
-              ["1sec", "1sec"],
-              ["2sec", "2sec"],
-              ["3sec", "3sec"],
-              ["5sec", "5sec"],
+              ["SLOW SPEED", "slow"],
+              ["NORMAL SPEED", "normal"],
+              ["HIGH SPEED", "high"],
           ]
         }
       ],
       "previousStatement": null,
       "nextStatement": null,
       "colour": 60,
-      "tooltip": "Execute Web API v1/straight/0",
+      "tooltip": "Execute Web API v1/forward/normal",
+      "helpUrl": null
+    });
+  }
+};
+
+Blockly.Blocks['webapi_back'] = {
+  /**
+   * Block for webapi back statement.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "back %1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "command",
+          "options": [
+              ["SLOW SPEED", "slow"],
+              ["NORMAL SPEED", "normal"],
+              ["HIGH SPEED", "high"],
+          ]
+        }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 60,
+      "tooltip": "Execute Web API v1/back/normal",
+      "helpUrl": null
+    });
+  }
+};
+
+Blockly.Blocks['webapi_drive'] = {
+  /**
+   * Block for webapi drive statement.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "drive %1 %2",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "command",
+          "options": [
+              ["SLOW SPEED", "slow"],
+              ["NORMAL SPEED", "normal"],
+              ["HIGH SPEED", "high"],
+          ]
+        },
+        {
+          "type": "field_dropdown",
+          "name": "command",
+          "options": [
+              ["2sec stop", ""],
+              ["near stop", "UNTIL_NEAR"],
+              ["bumper stop","UNTIL_BUMPER"],
+          ]
+        },
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 60,
+      "tooltip": "Execute Web API v1/back/drive",
+      "helpUrl": null
+    });
+  }
+};
+
+
+Blockly.Blocks['webapi_stop'] = {
+  /**
+   * Block for webapi turnright statement.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "stop",
+      "args0": null,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 60,
+      "tooltip": "Execute Web API v1/stop",
       "helpUrl": null
     });
   }
@@ -126,7 +185,7 @@ Blockly.Blocks['webapi_turnright'] = {
 
 Blockly.Blocks['webapi_turnleft'] = {
   /**
-   * Block for webapi turnright statement.
+   * Block for webapi turnleft statement.
    * @this Blockly.Block
    */
   init: function() {
@@ -142,6 +201,61 @@ Blockly.Blocks['webapi_turnleft'] = {
   }
 };
 
+Blockly.Blocks['webapi_turnfront'] = {
+  /**
+   * Block for webapi turnfront statement.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "turn front",
+      "args0": null,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 60,
+      "tooltip": "Execute Web API v1/turnfront",
+      "helpUrl": null
+    });
+  }
+};
+
+Blockly.Blocks['webapi_servo'] = {
+  /**
+   * Block for webapi servo statement.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "servo %1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "command",
+          "options": [
+              ["0", "0"],
+              ["15", "15"],
+              ["30", "30"],
+              ["45", "45"],
+              ["60", "60"],
+              ["75", "75"],
+              ["90", "90"],
+              ["105", "105"],
+              ["120", "120"],
+              ["135", "135"],
+              ["150", "150"],
+              ["165", "165"],
+              ["180", "180"],
+          ]
+        }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 60,
+      "tooltip": "Execute Web API v1/servo",
+      "helpUrl": null
+    });
+  }
+};
 
 // if serial id change dynamic, rewrite this function
 function dynamicSerialId() {
@@ -243,35 +357,3 @@ Blockly.Blocks['webapi_rebooter'] = {
   }
 };
 
-// if switcher id change dynamic, rewrite this function
-function dynamicSwitcherId() {
-    return [["0","0"]]
-}
-
-Blockly.Blocks['webapi_switcher'] = {
-  /**
-   * Block for webapi switcher write statement.
-   * @this Blockly.Block
-   */
-  init: function() {
-    this.jsonInit({
-      "message0": "switcher %1 write %2",
-      "args0": [
-        {
-          "type": "field_dropdown",
-          "name": "id",
-          "options": dynamicSwitcherId()
-        },
-        {
-          "type": "input_value",
-          "name": "msg"
-        }
-      ],
-      "previousStatement": null,
-      "nextStatement": null,
-      "colour": 60,
-      "tooltip": "Execute Web API v1/device/switchers/0",
-      "helpUrl": null
-    });
-  }
-};

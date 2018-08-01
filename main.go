@@ -1,167 +1,40 @@
+// Copyright 2018 Quattro Ace. All rights reserved.
+// Use of this source code is governed by a MIT
+// license that can be found in the LICENSE file.
+
 package main
 
 import (
-	"github.com/tarm/serial"
+//	"github.com/tarm/serial"
 	"log"
-//	"os"
-	"regexp"
-	"time"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
-	"fmt"
-	"html"
+	"./goparts"
 )
-
-var serialport *serial.Port
-
-func Info(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	c := &serial.Config{Name: "/dev/rfcomm0", Baud: 115200}
-	serialport, err := serial.OpenPort(c)
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Printf("%s\n",serialport)
-
-	log.Printf("[Info] accessed from %s\n", r.RequestURI)
-	_, err = serialport.Write([]byte("info\n"))
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	buf := make([]byte, 128)
-	message := ""
-	res, err := regexp.Compile("result: 0\n")
-	for {
-		time.Sleep(time.Millisecond * 20)
-
-		n, err := serialport.Read(buf)
-		if err != nil {
-			log.Fatal(err)
-			fmt.Fprintf(w, "[Info], %q", html.EscapeString(r.URL.Path))
-			return
-		}
-		message = message + string(buf[:n])
-
-		if res.MatchString(message) {
-			log.Print(message)
-			fmt.Fprintf(w, "[Info], %q", message)
-			return
-		}
-	}
-}
-
-func InfoTest(s *serial.Port)(error){
-	log.Print("> info")
-	_, err := s.Write([]byte("info\n"))
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	buf := make([]byte, 128)
-	message := ""
-	r, err := regexp.Compile("result: 0\n")
-	for {
-		time.Sleep(time.Millisecond * 20)
-
-		n, err := s.Read(buf)
-		if err != nil {
-			log.Fatal(err)
-			return err
-		}
-		message = message + string(buf[:n])
-
-		if r.MatchString(message) {
-			log.Print(message)
-			return nil
-		}
-	}
-}
-
-func LedOn(w http.ResponseWriter, r *http.Request, ps httprouter.Params ) {
-	log.Printf("[LedOn] accessed from %s\n", r.RequestURI)
-	_, err := serialport.Write([]byte("set_digtal 26 HIGH\n"))
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	buf := make([]byte, 128)
-	message := ""
-	res, err := regexp.Compile("result: 0\n")
-	for {
-		time.Sleep(time.Millisecond * 20)
-
-		n, err := serialport.Read(buf)
-		if err != nil {
-			log.Fatal(err)
-			fmt.Fprintf(w, "[LedOn], %q", html.EscapeString(r.URL.Path))
-			return
-		}
-		message = message + string(buf[:n])
-
-		if res.MatchString(message) {
-			log.Print(message)
-			fmt.Fprintf(w, "[LedOn], %q", message)
-			return
-		}
-	}
-
-}
-
-func LedOff(w http.ResponseWriter, r *http.Request, ps httprouter.Params ) {
-	log.Printf("[LedOn] accessed from %s\n", r.RequestURI)
-	_, err := serialport.Write([]byte("set_digtal 26 LOW\n"))
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	buf := make([]byte, 128)
-	message := ""
-	res, err := regexp.Compile("result: 0\n")
-	for {
-		time.Sleep(time.Millisecond * 20)
-
-		n, err := serialport.Read(buf)
-		if err != nil {
-			log.Fatal(err)
-			fmt.Fprintf(w, "[LedOff], %q", html.EscapeString(r.URL.Path))
-			return
-		}
-		message = message + string(buf[:n])
-
-		if res.MatchString(message) {
-			log.Print(message)
-			fmt.Fprintf(w, "[LedOff], %q", message)
-			return
-		}
-	}
-
-}
 
 
 func main() {
-//	c := &serial.Config{Name: "/dev/rfcomm0", Baud: 115200}
-//	serialport, err := serial.OpenPort(c)
-//	if err != nil {
-//		log.Fatal(err)
-//	}
-//	log.Printf("%s\n",serialport)
+	goparts.Initialize()
 
-//	err = InfoTest(serialport)
-//	if err != nil {
-//		os.Exit(1)
-//	}
-	
 	router := httprouter.New()
 	router.Handler("GET", "/",
 		&templateHandler{filename: "index.html"})
 	router.ServeFiles("/static/*filepath", http.Dir("static"))
-//	router.PUT("/v1/echo", Echo)
-	router.PUT("/v1/info", Info)
-	router.PUT("/v1/ledon", LedOn)
-	router.PUT("/v1/ledoff", LedOff)
+	router.PUT("/v1/info", goparts.Info)
+	router.PUT("/v1/ledon", goparts.LedOn)
+	router.PUT("/v1/ledoff", goparts.LedOff)
+	router.PUT("/v1/forward/:command", goparts.Forward)
+	router.PUT("/v1/back/:command", goparts.Back)
+	router.PUT("/v1/stop", goparts.Stop)
+	router.PUT("/v1/drive/:command/:option", goparts.Drive)
+	router.PUT("/v1/turnfront", goparts.Front)
+	router.PUT("/v1/turnleft", goparts.Left)
+	router.PUT("/v1/turnright", goparts.Right)
+	router.PUT("/v1/servo/:command", goparts.Servo)
 	log.Print("Server Start..")
 	port :=":8080"
 	log.Fatalf("listen serve error[%s]: %v\n", port, http.ListenAndServe(port, router))
 	log.Print("Server Finished.")
 
+	goparts.Finalize()
 }

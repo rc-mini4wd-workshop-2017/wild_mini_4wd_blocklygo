@@ -1,42 +1,6 @@
-
 //var webapiPrefix = "v1";
 var webapiPrefix = "http://localhost:8080/v1";
 
-Blockly.JavaScript['webapi_echo'] = function(block) {
-  // Print statement.
-  var msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
-      Blockly.JavaScript.ORDER_NONE) || '\'\'';
-
-  return 'webapiEcho(' + msg + ');\n';
-};
-
-function initInterpreterWebapiEcho(interpreter, scope) {
-  // Ensure function name does not conflict with variable names.
-  Blockly.JavaScript.addReservedWords('webapiEcho');
-  var wrapper = interpreter.createAsyncFunction(
-    function(msg, callback) {
-      var url = webapiPrefix + '/echo';
-      window.alert("echo< url: " + url);
-      window.alert("echo< " + msg);
-
-      // Delay the call to the callback.
-      $.ajax({
-        type: 'PUT',
-        url: url,
-        dataType: 'text',
-        data: msg,
-        success: function(text, status, xhr){
-          window.alert("echo> " + text);
-          callback();
-        },
-        error: function(xhr){
-          window.alert("echo> error: " + xhr.status);
-          window.alert("echo> " + xhr.responseText);
-        }
-      });
-    });
-  interpreter.setProperty(scope, 'webapiEcho', wrapper);
-}
 
 Blockly.JavaScript['webapi_info'] = function(block) {
   // Print statement.
@@ -143,22 +107,20 @@ function initInterpreterWebapiLedoff(interpreter, scope) {
   interpreter.setProperty(scope, 'webapiLedoff', wrapper);
 }
 
-Blockly.JavaScript['webapi_straight'] = function(block) {
+Blockly.JavaScript['webapi_forward'] = function(block) {
   // Print statement.
-  var id = block.getFieldValue('id');
-  var command = block.getFieldValue('command');
-  var args = '\'' + id + '\',\'' + command + '\'';
-  return 'webapiStraight(' + args + ');\n';
+  var args = '\'' + block.getFieldValue('command') + '\'';
+  return 'webapiForward(' + args + ');\n';
 };
 
-function initInterpreterWebapiStraight(interpreter, scope) {
+function initInterpreterWebapiForward(interpreter, scope) {
   // Ensure function name does not conflict with variable names.
-  Blockly.JavaScript.addReservedWords('webapiStraight');
+  Blockly.JavaScript.addReservedWords('webapiForward');
   var wrapper = interpreter.createAsyncFunction(
-    function(id, command, callback) {
-      var url = webapiPrefix + '/device/straight/' + id + '/' + command;
-      window.alert("straight< url: " + url);
-      window.alert("straight< command: " + command);
+    function(command, callback) {
+      var url = webapiPrefix + '/forward/' + command;
+      window.alert("forward< url: " + url);
+      window.alert("forward< speed: " + command);
 
       // Delay the call to the callback.
       $.ajax({
@@ -167,33 +129,33 @@ function initInterpreterWebapiStraight(interpreter, scope) {
         dataType: 'text',
         data: command,
         success: function(text, status, xhr){
-          window.alert("straight> " + text);
+          window.alert("forward> " + text);
           callback();
         },
         error: function(xhr){
-          window.alert("straight> error: " + xhr.status);
-          window.alert("straight> " + xhr.responseText);
+          window.alert("forward> error: " + xhr.status);
+          window.alert("forward> " + xhr.responseText);
           callback();
         }
       });
     });
-  interpreter.setProperty(scope, 'webapiStraight', wrapper);
+  interpreter.setProperty(scope, 'webapiForward', wrapper);
 }
 
-Blockly.JavaScript['webapi_turnright'] = function(block) {
+Blockly.JavaScript['webapi_back'] = function(block) {
   // Print statement.
-  var id = block.getFieldValue('id');
-
-  return 'webapiTurnRight(\'' + id + '\');\n';
+  var args = '\'' + block.getFieldValue('command') + '\'';
+  return 'webapiBack(' + args + ');\n';
 };
 
-function initInterpreterWebapiTurnRight(interpreter, scope) {
+function initInterpreterWebapiBack(interpreter, scope) {
   // Ensure function name does not conflict with variable names.
-  Blockly.JavaScript.addReservedWords('webapiTurnrigtt');
+  Blockly.JavaScript.addReservedWords('webapiBack');
   var wrapper = interpreter.createAsyncFunction(
-    function(id, command, callback) {
-      var url = webapiPrefix + '/device/turnright/' + id;
-      window.alert("turnright< url: " + url);
+    function(command, callback) {
+      var url = webapiPrefix + '/back/' + command;
+      window.alert("back< url: " + url);
+      window.alert("back< speed: " + command);
 
       // Delay the call to the callback.
       $.ajax({
@@ -201,6 +163,110 @@ function initInterpreterWebapiTurnRight(interpreter, scope) {
         url: url,
         dataType: 'text',
         data: command,
+        success: function(text, status, xhr){
+          window.alert("back> " + text);
+          callback();
+        },
+        error: function(xhr){
+          window.alert("back> error: " + xhr.status);
+          window.alert("back> " + xhr.responseText);
+          callback();
+        }
+      });
+    });
+  interpreter.setProperty(scope, 'webapiBack', wrapper);
+}
+
+Blockly.JavaScript['webapi_stop'] = function(block) {
+  // Print statement.
+  return 'webapiStop();\n';
+};
+
+function initInterpreterWebapiStop(interpreter, scope) {
+  // Ensure function name does not conflict with variable names.
+  Blockly.JavaScript.addReservedWords('webapiStop');
+  var wrapper = interpreter.createAsyncFunction(
+    function(callback) {
+      var url = webapiPrefix + '/stop/';
+      window.alert("stop< url: " + url);
+
+      // Delay the call to the callback.
+      $.ajax({
+        type: 'PUT',
+        url: url,
+        dataType: 'text',
+        data: '',
+        success: function(text, status, xhr){
+          window.alert("stop> " + text);
+          callback();
+        },
+        error: function(xhr){
+          window.alert("stop> error: " + xhr.status);
+          window.alert("stop> " + xhr.responseText);
+          callback();
+        }
+      });
+    });
+  interpreter.setProperty(scope, 'webapiStop', wrapper);
+}
+
+Blockly.JavaScript['webapi_drive'] = function(block) {
+  // Print statement.
+  var command = block.getFieldValue('command');
+  var option = block.getFieldValue('option');
+  var args = '\'' + command + '\',\'' + option + '\'';
+  return 'webapiDrive(' + args + ');\n';
+};
+
+function initInterpreterWebapiDrive(interpreter, scope) {
+  // Ensure function name does not conflict with variable names.
+  Blockly.JavaScript.addReservedWords('webapiDrive');
+  var wrapper = interpreter.createAsyncFunction(
+    function(command, option, callback) {
+      var url = webapiPrefix + '/drive/' + command + '/' + option;
+      window.alert("drive< url: " + url);
+      window.alert("drive< speed: " + command);
+      window.alert("drive< option: " + option);
+      
+      // Delay the call to the callback.
+      $.ajax({
+        type: 'PUT',
+        url: url,
+        dataType: 'text',
+        data: command, option,
+        success: function(text, status, xhr){
+          window.alert("drive> " + text);
+          callback();
+        },
+        error: function(xhr){
+          window.alert("drive> error: " + xhr.status);
+          window.alert("drive> " + xhr.responseText);
+          callback();
+        }
+      });
+    });
+  interpreter.setProperty(scope, 'webapiDrive', wrapper);
+}
+
+Blockly.JavaScript['webapi_turnright'] = function(block) {
+  // Print statement.
+  return 'webapiTurnRight();\n';
+};
+
+function initInterpreterWebapiTurnRight(interpreter, scope) {
+  // Ensure function name does not conflict with variable names.
+  Blockly.JavaScript.addReservedWords('webapiTurnRight');
+  var wrapper = interpreter.createAsyncFunction(
+    function(callback) {
+      var url = webapiPrefix + '/turnright';
+      window.alert("turnright< url: " + url);
+
+      // Delay the call to the callback.
+      $.ajax({
+        type: 'PUT',
+        url: url,
+        dataType: 'text',
+        data: '',
         success: function(text, status, xhr){
           window.alert("turnright> " + text);
           callback();
@@ -217,17 +283,15 @@ function initInterpreterWebapiTurnRight(interpreter, scope) {
 
 Blockly.JavaScript['webapi_turnleft'] = function(block) {
   // Print statement.
-  var id = block.getFieldValue('id');
-
-  return 'webapiTurnLeft(\'' + id + '\');\n';
+  return 'webapiTurnLeft();\n';
 };
 
 function initInterpreterWebapiTurnLeft(interpreter, scope) {
   // Ensure function name does not conflict with variable names.
-  Blockly.JavaScript.addReservedWords('webapiTurnleft');
+  Blockly.JavaScript.addReservedWords('webapiTurnLeft');
   var wrapper = interpreter.createAsyncFunction(
-    function(id, command, callback) {
-      var url = webapiPrefix + '/device/turnright/' + id;
+    function(callback) {
+      var url = webapiPrefix + '/turnleft';
       window.alert("turnleft< url: " + url);
 
       // Delay the call to the callback.
@@ -235,7 +299,7 @@ function initInterpreterWebapiTurnLeft(interpreter, scope) {
         type: 'PUT',
         url: url,
         dataType: 'text',
-        data: command,
+        data: '',
         success: function(text, status, xhr){
           window.alert("turnleft> " + text);
           callback();
@@ -250,6 +314,73 @@ function initInterpreterWebapiTurnLeft(interpreter, scope) {
   interpreter.setProperty(scope, 'webapiTurnLeft', wrapper);
 }
 
+Blockly.JavaScript['webapi_turnfront'] = function(block) {
+  // Print statement.
+  return 'webapiTurnFront();\n';
+};
+
+function initInterpreterWebapiTurnFront(interpreter, scope) {
+  // Ensure function name does not conflict with variable names.
+  Blockly.JavaScript.addReservedWords('webapiTurnFront');
+  var wrapper = interpreter.createAsyncFunction(
+    function(callback) {
+      var url = webapiPrefix + '/turnfront';
+      window.alert("turnfront< url: " + url);
+
+      // Delay the call to the callback.
+      $.ajax({
+        type: 'PUT',
+        url: url,
+        dataType: 'text',
+        data: '',
+        success: function(text, status, xhr){
+          window.alert("turnfront> " + text);
+          callback();
+        },
+        error: function(xhr){
+          window.alert("turnfront> error: " + xhr.status);
+          window.alert("turnfront> " + xhr.responseText);
+          callback();
+        }
+      });
+    });
+  interpreter.setProperty(scope, 'webapiTurnFront', wrapper);
+}
+
+Blockly.JavaScript['webapi_servo'] = function(block) {
+  // Print statement.
+  var args = '\'' + block.getFieldValue('command') + '\'';
+  return 'webapiServo(' + args + ');\n';
+};
+
+function initInterpreterWebapiServo(interpreter, scope) {
+  // Ensure function name does not conflict with variable names.
+  Blockly.JavaScript.addReservedWords('webapiServo');
+  var wrapper = interpreter.createAsyncFunction(
+    function(command, callback) {
+      var url = webapiPrefix + '/servo/' + command;
+      window.alert("servo< url: " + url);
+      window.alert("servo< angle:" + command);
+      
+      // Delay the call to the callback.
+      $.ajax({
+        type: 'PUT',
+        url: url,
+        dataType: 'text',
+        data: command,
+        success: function(text, status, xhr){
+          window.alert("servo> " + text);
+          callback();
+        },
+        error: function(xhr){
+          window.alert("servo> error: " + xhr.status);
+          window.alert("servo> " + xhr.responseText);
+          callback();
+        }
+      });
+    });
+  interpreter.setProperty(scope, 'webapiServo', wrapper);
+}
 
 Blockly.JavaScript['webapi_write_serial'] = function(block) {
   // Print statement.
@@ -358,56 +489,23 @@ function initInterpreterWebapiRebooter(interpreter, scope) {
   interpreter.setProperty(scope, 'webapiRebooter', wrapper);
 }
 
-Blockly.JavaScript['webapi_switcher'] = function(block) {
-  // Print statement.
-  var id = block.getFieldValue('id');
-  var msg = Blockly.JavaScript.valueToCode(block, 'msg',
-      Blockly.JavaScript.ORDER_NONE) || '\'\'';
-  var args = '\'' + id + '\',' + msg;
-  return 'webapiExecuteSwitcher(' + args + ');\n';
-};
-
-function initInterpreterWebapiSwitcher(interpreter, scope) {
-  // Ensure function name does not conflict with variable names.
-  Blockly.JavaScript.addReservedWords('webapiExecuteSwitcher');
-  var wrapper = interpreter.createAsyncFunction(
-    function(id, msg, callback) {
-      var url = webapiPrefix + '/device/switchers/' + id + '/' + msg;
-      window.alert("switcher> url: " + url);
-
-      // Delay the call to the callback.
-      $.ajax({
-        type: 'PUT',
-        url: url,
-        dataType: 'text',
-        data: msg,
-        success: function(text, status, xhr){
-          window.alert("switcher> " + text);
-          callback();
-        },
-        error: function(xhr){
-          window.alert("switcher> error: " + xhr.status);
-          window.alert("switcher> " + xhr.responseText);
-          callback();
-        }
-      });
-    });
-  interpreter.setProperty(scope, 'webapiExecuteSwitcher', wrapper);
-}
 
 /**
  * Register the interpreter asynchronous webapi functions
  */
 function initInterpreterWebapi(interpreter, scope) {
-  initInterpreterWebapiEcho(interpreter, scope);
   initInterpreterWebapiInfo(interpreter, scope);
   initInterpreterWebapiLedon(interpreter, scope);
   initInterpreterWebapiLedoff(interpreter, scope);
-  initInterpreterWebapiStraight(interpreter, scope);
+  initInterpreterWebapiForward(interpreter, scope);
+  initInterpreterWebapiBack(interpreter, scope);
+  initInterpreterWebapiStop(interpreter, scope);
+  initInterpreterWebapiDrive(interpreter, scope);
   initInterpreterWebapiTurnRight(interpreter, scope);
   initInterpreterWebapiTurnLeft(interpreter, scope);
+  initInterpreterWebapiTurnFront(interpreter, scope);
+  initInterpreterWebapiServo(interpreter, scope);
   initInterpreterWebapiWriteSerial(interpreter, scope);
   initInterpreterWebapiReadSerial(interpreter, scope);
   initInterpreterWebapiRebooter(interpreter, scope);
-  initInterpreterWebapiSwitcher(interpreter, scope);
 }
