@@ -129,9 +129,9 @@ Blockly.Blocks['webapi_drive'] = {
         },
         {
           "type": "field_dropdown",
-          "name": "command",
+          "name": "option",
           "options": [
-              ["2sec stop", ""],
+              ["2sec stop", "2sec"],
               ["near stop", "UNTIL_NEAR"],
               ["bumper stop","UNTIL_BUMPER"],
           ]
@@ -140,7 +140,7 @@ Blockly.Blocks['webapi_drive'] = {
       "previousStatement": null,
       "nextStatement": null,
       "colour": 60,
-      "tooltip": "Execute Web API v1/back/drive",
+      "tooltip": "Execute Web API v1/back/drive/0",
       "helpUrl": null
     });
   }

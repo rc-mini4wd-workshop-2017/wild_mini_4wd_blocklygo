@@ -12,7 +12,7 @@ import (
 )
 
 func Front(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	result, body, err := ExecCommand(w, "set_servo 90")
+	result, body, err := ExecCommand(w, "drive_steering FORWARD")
 	if ((err != nil) && (result != 0)) {
 		time.Sleep(time.Second)
 	}

@@ -86,7 +86,7 @@ func Drive(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	case "UNTIL_BUMPER":
 		stop = "UNTIL_BUMPER"
 	}
-	result, body, err := ExecCommand(w, "drive_steering " + speed + " " + stop)
+	result, body, err := ExecCommand(w, "drive_motor " + speed + " " + stop)
 	if ((err != nil) && (result != 0)) {
 		time.Sleep(time.Second)
 	}
