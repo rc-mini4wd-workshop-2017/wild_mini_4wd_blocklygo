@@ -45,10 +45,13 @@
 
 <div class="row">
 <div class="col-xs-3">
-<button onclick="runCode()" id="runButton" class="btn btn-primary btn-block">Run</button>
+<button onclick="runCode()" id="runButton" class="btn btn-primary btn-block">実行</button>
 </div>
 <div class="col-xs-3">
-<button onclick="stopCode()" id="stopButton" class="btn btn-danger btn-block">Stop</button>
+<button onclick="stopCode()" id="stopButton" class="btn btn-danger btn-block">停止</button>
+</div>
+<div class="col-xs-3">
+<button onclick="clearCode()" id="clearButton" class="btn btn-danger btn-block">削除</button>
 </div>
 </div>
 
@@ -105,9 +108,9 @@
 
 <script>
   var workspacePlayground = Blockly.inject('blocklyDiv', {toolbox:
-    document.getElementById('toolbox')});
-    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
-    workspacePlayground);
+  document.getElementById('toolbox')});
+  Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
+                             workspacePlayground);
 
   // Exit is used to signal the end of a script.
   Blockly.JavaScript.addReservedWords('exit');
@@ -256,6 +259,10 @@
     resetInterpreter();
     resetStepUi(false);
     outputArea.value += '\n\n<< Program interrupted >>';
+  }
+
+  function clearCode() {
+    workspacePlayground.clear();
   }
 
   // Load the interpreter now, and upon future changes.
