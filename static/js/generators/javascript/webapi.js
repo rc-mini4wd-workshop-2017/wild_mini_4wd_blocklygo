@@ -1,6 +1,4 @@
-//var webapiPrefix = "v1";
-var webapiPrefix = "http://localhost:8080/v1";
-
+var webapiPrefix = "v1";
 
 Blockly.JavaScript['webapi_info'] = function(block) {
   // Print statement.
