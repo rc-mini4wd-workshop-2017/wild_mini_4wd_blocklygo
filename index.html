@@ -44,7 +44,6 @@
 <div class="container-fluid">
 
 <div class="row">
-<!-- <h2>Let's try</h2> -->
 <div class="col-xs-3">
 <button onclick="runCode()" id="runButton" class="btn btn-primary btn-block">Run</button>
 </div>
@@ -90,10 +89,25 @@
   </category>
 
 </xml>
+<xml id="startBlocks" style="display: none">
+  <block type="webapi_turnfront" x=0 y=0><next>
+  <block type="webapi_forward"><field name="option">2</field><field name="command">slow</field><next>
+  <block type="webapi_turnright"><next>
+  <block type="webapi_drive"><field name="distance">10</field><field name="command">slow</field><next>
+  <block type="webapi_turnfront"><next>
+          
+  </next></block>
+  </next></block>
+  </next></block>
+  </next></block>
+  </next></block>
+</xml>
 
 <script>
-  var workspacePlayground = Blockly.inject('blocklyDiv',
-    {toolbox: document.getElementById('toolbox')});
+  var workspacePlayground = Blockly.inject('blocklyDiv', {toolbox:
+    document.getElementById('toolbox')});
+    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
+    workspacePlayground);
 
   // Exit is used to signal the end of a script.
   Blockly.JavaScript.addReservedWords('exit');
