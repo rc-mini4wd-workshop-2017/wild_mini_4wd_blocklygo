@@ -31,7 +31,7 @@ func Forward(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	case "high":
 		speed = forward_speed_high
 	}
-	ExecLongtimeCommand(w, "drive_motor "+speed+" "+option, time.Second*20)
+	ExecLongtimeCommand(w, "drive_motor "+speed+" UNTIL_TIME "+option, time.Second*20)
 }
 
 func Back(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
@@ -46,7 +46,7 @@ func Back(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	case "high":
 		speed = back_speed_high
 	}
-	ExecLongtimeCommand(w, "drive_motor "+speed+" "+option, time.Second*20)
+	ExecLongtimeCommand(w, "drive_motor "+speed+" UNTIL_TIME "+option, time.Second*20)
 
 }
 
@@ -56,6 +56,7 @@ func Stop(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 func Drive(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	command := ps.ByName("command")
+	distance := ps.ByName("distance")
 
 	// speed setting
 	speed := forward_speed_normal
@@ -68,5 +69,5 @@ func Drive(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		speed = forward_speed_high
 	}
 	// stop setting
-	ExecLongtimeCommand(w, "drive_motor "+speed+ " UNTIL_NEAR", time.Second*20)
+	ExecLongtimeCommand(w, "drive_motor "+speed+" UNTIL_NEAR "+distance, time.Second*20)
 }

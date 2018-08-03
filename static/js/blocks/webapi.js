@@ -109,8 +109,25 @@ Blockly.Blocks['webapi_drive'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "障害物の20cm前まで %1 進む",
+      "message0": "障害物の %1 前まで %2 進む",
       "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "distance",
+          "options": [
+              ["5cm", "5"],
+              ["10cm", "10"],
+              ["20cm", "20"],
+              ["30cm", "30"],
+              ["40cm", "40"],
+              ["50cm", "50"],
+              ["60cm", "60"],
+              ["70cm", "70"],
+              ["80cm", "80"],
+              ["90cm", "90"],
+              ["100cm", "100"],
+          ]
+        },
         {
           "type": "field_dropdown",
           "name": "command",
