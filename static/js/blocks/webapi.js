@@ -44,9 +44,9 @@ Blockly.Blocks['webapi_forward'] = {
           "type": "field_dropdown",
           "name": "command",
           "options": [
-              ["ゆっくり", "slow"],
-              ["ふつう", "normal"],
-              ["はやい", "high"],
+              ["遅く", "slow"],
+              ["普通に", "normal"],
+              ["速く", "high"],
           ]
         },
       ],
@@ -87,9 +87,9 @@ Blockly.Blocks['webapi_back'] = {
           "type": "field_dropdown",
           "name": "command",
           "options": [
-              ["ゆっくり", "slow"],
-              ["ふつう", "normal"],
-              ["はやい", "high"],
+              ["遅く", "slow"],
+              ["普通に", "normal"],
+              ["速く", "high"],
           ]
         },
       ],
@@ -115,9 +115,9 @@ Blockly.Blocks['webapi_drive'] = {
           "type": "field_dropdown",
           "name": "command",
           "options": [
-              ["ゆっくり", "slow"],
-              ["ふつう", "normal"],
-              ["はやい", "high"],
+              ["遅く", "slow"],
+              ["普通に", "normal"],
+              ["速く", "high"],
           ]
         }
       ],
