@@ -11,16 +11,17 @@ import (
 )
 
 const (
-	forward_speed_slow   = "41"
-	forward_speed_normal = "61"
-	forward_speed_high   = "81"
-	back_speed_slow      = "42"
-	back_speed_normal    = "62"
-	back_speed_high      = "82"
+	forward_speed_slow   = "61"
+	forward_speed_normal = "81"
+	forward_speed_high   = "101"
+	back_speed_slow      = "62"
+	back_speed_normal    = "82"
+	back_speed_high      = "102"
 )
 
 func Forward(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	command := ps.ByName("command")
+	option := ps.ByName("option")
 	speed := forward_speed_normal
 	switch command {
 	case "slow":
@@ -30,11 +31,12 @@ func Forward(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	case "high":
 		speed = forward_speed_high
 	}
-	ExecCommand(w, "set_motor "+speed)
+	ExecLongtimeCommand(w, "drive_motor "+speed+" "+option, time.Second*20)
 }
 
 func Back(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	command := ps.ByName("command")
+	option := ps.ByName("option")
 	speed := back_speed_normal
 	switch command {
 	case "slow":
@@ -44,7 +46,8 @@ func Back(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	case "high":
 		speed = back_speed_high
 	}
-	ExecCommand(w, "set_motor "+speed)
+	ExecLongtimeCommand(w, "drive_motor "+speed+" "+option, time.Second*20)
+
 }
 
 func Stop(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
@@ -53,7 +56,6 @@ func Stop(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 func Drive(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	command := ps.ByName("command")
-	option := ps.ByName("option")
 
 	// speed setting
 	speed := forward_speed_normal
@@ -66,12 +68,5 @@ func Drive(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		speed = forward_speed_high
 	}
 	// stop setting
-	stop := ""
-	switch option {
-	case "UNTIL_NEAR":
-		stop = "UNTIL_NEAR"
-	case "UNTIL_BUMPER":
-		stop = "UNTIL_BUMPER"
-	}
-	ExecLongtimeCommand(w, "drive_motor "+speed+" "+stop, time.Second*20)
+	ExecLongtimeCommand(w, "drive_motor "+speed+ " UNTIL_NEAR", time.Second*20)
 }

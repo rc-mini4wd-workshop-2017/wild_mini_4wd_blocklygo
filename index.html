@@ -63,36 +63,19 @@
 </div>
 
 <xml id="toolbox" style="display: none">
-  <category name="Logic">
-    <block type="controls_if"></block>
-    <block type="logic_compare"></block>
-    <block type="logic_operation"></block>
-    <block type="logic_negate"></block>
-    <block type="logic_boolean"></block>
-  </category>
 
-  <category name="Time">
-    <block type="wait_seconds"></block>
-  </category>
-  
-  <!-- *** Go Block *** -->
-  <category name="Go">
+  <!-- *** ドライブ Block *** -->
+  <category name="進む">
     <block type="webapi_forward">
     </block>
     <block type="webapi_back">
     </block>
-    <block type="webapi_stop">
-    </block>
-  </category>
-
-  <!-- *** Drive Block *** -->
-  <category name="Drive">
     <block type="webapi_drive">
     </block>
   </category>
 
-  <!-- *** Turn Block *** -->
-  <category name="Turn">
+  <!-- *** ハンドル Block *** -->
+  <category name="ハンドル">
     <block type="webapi_turnright">
     </block>
     <block type="webapi_turnleft">
@@ -101,29 +84,11 @@
     </block>
   </category>
 
-  <!-- *** Servo Block *** -->
-  <category name="Servo">
-    <block type="webapi_servo">
-    </block>
-  </category>
 
-  <category name="Other">   
+  <category name="その他">   
     <block type="webapi_info"></block>
-    <block type="webapi_ledon"></block>
-    <block type="webapi_ledoff"></block>
   </category>
 
-  <category name="WebAPI">
-    <block type="webapi_write_serial">
-      <value name="msg">
-        <block type="text">
-          <field name="TEXT">Hello World</field>
-        </block>
-      </value>
-    </block>
-    <block type="webapi_read_serial"></block>
-    <block type="webapi_rebooter"></block>
-  </category>
 </xml>
 
 <script>
