@@ -146,7 +146,9 @@ function initInterpreterWebapiStop(interpreter, scope) {
 
 Blockly.JavaScript['webapi_drive'] = function(block) {
   // Print statement.
-  var args = '\'' + block.getFieldValue('command') + '\'';
+  var command = block.getFieldValue('command');
+  var distance = block.getFieldValue('distance');
+  var args = '\'' + command + '\',\'' + distance + '\'';
   return 'webapiDrive(' + args + ');\n';
 };
 
@@ -154,10 +156,11 @@ function initInterpreterWebapiDrive(interpreter, scope) {
   // Ensure function name does not conflict with variable names.
   Blockly.JavaScript.addReservedWords('webapiDrive');
   var wrapper = interpreter.createAsyncFunction(
-    function(command, callback) {
-      var url = webapiPrefix + '/drive/' + command;
+    function(command, distance, callback) {
+      var url = webapiPrefix + '/drive/' + command + '/' + distance;
       window.alert("drive< url: " + url);
       window.alert("drive< speed: " + command);
+      window.alert("drive< distance: " + distance);
       
       // Delay the call to the callback.
       $.ajax({
