@@ -5,24 +5,20 @@
 package goparts
 
 import (
-	"fmt"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
 )
 
 func Info(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	_, body, _ := ExecCommand(w, "info")
-	fmt.Fprintf(w, "%s", body)
+	ExecCommand(w, "info")
 }
 
 func LedOn(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	_, body, _ := ExecCommand(w, "set_digtal 26 HIGH")
-	fmt.Fprintf(w, "%s", body)
+	ExecCommand(w, "set_digtal 26 HIGH")
 }
 
 func LedOff(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	_, body, _ := ExecCommand(w, "set_digtal 26 LOW")
-	fmt.Fprintf(w, "%s", body)
+	ExecCommand(w, "set_digtal 26 LOW")
 }
 
 func Log(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
