@@ -5,7 +5,7 @@ Blockly.Blocks['webapi_info'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "バージョン取得",
+      "message0": "%{BKY_WEBAPI_INFO_MESSAGE}",
       "args0": null,
       "previousStatement": null,
       "nextStatement": null,
@@ -23,30 +23,30 @@ Blockly.Blocks['webapi_forward'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "%1 秒 %2 前に進む",
+      "message0": "%{BKY_WEBAPI_FORWARD_MESSAGE}",
       "args0": [
         {
           "type": "field_dropdown",
           "name": "option",
           "options": [
-              ["2秒", "2"],
-              ["3秒", "3"],
-              ["4秒", "4"],
-              ["5秒", "5"],
-              ["6秒", "6"],
-              ["7秒", "7"],
-              ["8秒", "8"],
-              ["9秒", "9"],
-              ["10秒", "10"],
+              ["2", "2"],
+              ["3", "3"],
+              ["4", "4"],
+              ["5", "5"],
+              ["6", "6"],
+              ["7", "7"],
+              ["8", "8"],
+              ["9", "9"],
+              ["10", "10"],
           ]
         },
         {
           "type": "field_dropdown",
           "name": "command",
           "options": [
-              ["遅く", "slow"],
-              ["普通に", "normal"],
-              ["速く", "high"],
+              ["%{BKY_WEBAPI_FORWARD_SLOW}", "slow"],
+              ["%{BKY_WEBAPI_FORWARD_NORMAL}", "normal"],
+              ["%{BKY_WEBAPI_FORWARD_HIGH}", "high"],
           ]
         },
       ],
@@ -66,30 +66,30 @@ Blockly.Blocks['webapi_back'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "%1 秒 %2 後ろに進む",
+      "message0": "%{BKY_WEBAPI_BACK_MESSAGE}",
       "args0": [
         {
           "type": "field_dropdown",
           "name": "option",
           "options": [
-              ["2秒", "2"],
-              ["3秒", "3"],
-              ["4秒", "4"],
-              ["5秒", "5"],
-              ["6秒", "6"],
-              ["7秒", "7"],
-              ["8秒", "8"],
-              ["9秒", "9"],
-              ["10秒", "10"],
+              ["2", "2"],
+              ["3", "3"],
+              ["4", "4"],
+              ["5", "5"],
+              ["6", "6"],
+              ["7", "7"],
+              ["8", "8"],
+              ["9", "9"],
+              ["10", "10"],
           ]
         },
         {
           "type": "field_dropdown",
           "name": "command",
           "options": [
-              ["遅く", "slow"],
-              ["普通に", "normal"],
-              ["速く", "high"],
+              ["%{BKY_WEBAPI_BACK_SLOW}", "slow"],
+              ["%{BKY_WEBAPI_BACK_NORMAL}", "normal"],
+              ["%{BKY_WEBAPI_BACK_HIGH}", "high"],
           ]
         },
       ],
@@ -109,32 +109,32 @@ Blockly.Blocks['webapi_drive'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "障害物の %1 前まで %2 進む",
+      "message0": "%{BKY_WEBAPI_DRIVE_MESSAGE}",
       "args0": [
         {
           "type": "field_dropdown",
           "name": "distance",
           "options": [
-              ["5cm", "5"],
-              ["10cm", "10"],
-              ["20cm", "20"],
-              ["30cm", "30"],
-              ["40cm", "40"],
-              ["50cm", "50"],
-              ["60cm", "60"],
-              ["70cm", "70"],
-              ["80cm", "80"],
-              ["90cm", "90"],
-              ["100cm", "100"],
+              ["5", "5"],
+              ["10", "10"],
+              ["20", "20"],
+              ["30", "30"],
+              ["40", "40"],
+              ["50", "50"],
+              ["60", "60"],
+              ["70", "70"],
+              ["80", "80"],
+              ["90", "90"],
+              ["100", "100"],
           ]
         },
         {
           "type": "field_dropdown",
           "name": "command",
           "options": [
-              ["遅く", "slow"],
-              ["普通に", "normal"],
-              ["速く", "high"],
+              ["%{BKY_WEBAPI_DRIVE_SLOW}", "slow"],
+              ["%{BKY_WEBAPI_DRIVE_NORMAL}", "normal"],
+              ["%{BKY_WEBAPI_DRIVE_HIGH}", "high"],
           ]
         }
       ],
@@ -172,7 +172,7 @@ Blockly.Blocks['webapi_turnright'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "右にハンドルをきる",
+      "message0": "%{BKY_WEBAPI_TURN_RIGHT_MESSAGE}",
       "args0": null,
       "previousStatement": null,
       "nextStatement": null,
@@ -190,7 +190,7 @@ Blockly.Blocks['webapi_turnleft'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "左にハンドルをきる",
+      "message0": "%{BKY_WEBAPI_TURN_LEFT_MESSAGE}",
       "args0": null,
       "previousStatement": null,
       "nextStatement": null,
@@ -208,7 +208,7 @@ Blockly.Blocks['webapi_turnfront'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "ハンドルを戻す",
+      "message0": "%{BKY_WEBAPI_TURN_FRONT_MESSAGE}",
       "args0": null,
       "previousStatement": null,
       "nextStatement": null,

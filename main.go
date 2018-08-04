@@ -16,7 +16,11 @@ func main() {
 
 	router := httprouter.New()
 	router.Handler("GET", "/",
-		&templateHandler{filename: "index.html"})
+		&templateHandler{filename: "index.html", Lang: "ja"})
+	router.Handler("GET", "/index.html",
+		&templateHandler{filename: "index.html", Lang: "ja"})
+	router.Handler("GET", "/index_en.html",
+		&templateHandler{filename: "index.html", Lang: "en"})
 	router.ServeFiles("/static/*filepath", http.Dir("static"))
 	router.PUT("/v1/info", goparts.Info)
 	router.PUT("/v1/forward/:command/:option", goparts.Forward)
