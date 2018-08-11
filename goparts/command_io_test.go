@@ -176,10 +176,10 @@ func TestGetDistanceCommand(t *testing.T) {
 }
 
 func TestDriveMotorCommand(t *testing.T) {
-	testLongTimeCommand(t, "drive_motor 61", time.Second*3)
-	testLongTimeCommand(t, "drive_motor 62", time.Second*3)
-	testLongTimeCommand(t, "drive_motor 61 UNTIL_NEAR", time.Second*20)
-	testLongTimeCommand(t, "drive_motor 62 UNTIL_NEAR", time.Second*20)
-	testLongTimeCommand(t, "drive_motor 61 UNTIL_BUMPER", time.Second*20)
-	testLongTimeCommand(t, "drive_motor 62 UNTIL_BUMPER", time.Second*20)
+	testLongTimeCommand(t, "drive_motor 61 UNTIL_TIME 2", time.Second*5)
+	testLongTimeCommand(t, "drive_motor 62 UNTIL_TIME 2", time.Second*5)
+	testLongTimeCommand(t, "drive_motor 61 UNTIL_NEAR", time.Second*30)
+	testLongTimeCommand(t, "drive_motor 62 UNTIL_NEAR", time.Second*30)
+	testLongTimeCommand(t, "drive_motor 61 UNTIL_BUMPER", time.Second*30)
+	testLongTimeCommand(t, "drive_motor 62 UNTIL_BUMPER", time.Second*30)
 }
