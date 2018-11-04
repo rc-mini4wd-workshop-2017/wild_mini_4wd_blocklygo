@@ -22,3 +22,5 @@ Blockly.Msg.WEBAPI_DRIVE_HIGH      = "high";
 Blockly.Msg.WEBAPI_TURN_RIGHT_MESSAGE = "Turn the steering wheel to the right";
 Blockly.Msg.WEBAPI_TURN_LEFT_MESSAGE  = "Turn the steering wheel to the left";
 Blockly.Msg.WEBAPI_TURN_FRONT_MESSAGE = "Return the steering wheel";
+
+Blockly.Msg.WEBAPI_IRGUN_MESSAGE   = "Shoot the cannon";

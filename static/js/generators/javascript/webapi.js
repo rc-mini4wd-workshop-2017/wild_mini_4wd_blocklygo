@@ -281,6 +281,41 @@ function initInterpreterWebapiTurnFront(interpreter, scope) {
   interpreter.setProperty(scope, 'webapiTurnFront', wrapper);
 }
 
+Blockly.JavaScript['webapi_irgun'] = function(block) {
+  // Print statement.
+  var msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
+      Blockly.JavaScript.ORDER_NONE) || '\'\'';
+
+  return 'webapiIrGun();\n';
+};
+
+function initInterpreterWebapiIrGun(interpreter, scope) {
+  // Ensure function name does not conflict with variable names.
+  Blockly.JavaScript.addReservedWords('webapiIrGun');
+  var wrapper = interpreter.createAsyncFunction(
+    function(callback) {
+      var url = webapiPrefix + '/irgun';
+      window.alert("irgun< url: " + url);
+
+      // Delay the call to the callback.
+      $.ajax({
+        type: 'PUT',
+        url: url,
+        dataType: 'text',
+        data: '',
+        success: function(text, status, xhr){
+          window.alert("irgun> " + text);
+          callback();
+        },
+        error: function(xhr){
+          window.alert("irgun> error: " + xhr.status);
+          window.alert("irgun> " + xhr.responseText);
+        }
+      });
+    });
+  interpreter.setProperty(scope, 'webapiIrGun', wrapper);
+}
+
 
 /**
  * Register the interpreter asynchronous webapi functions
@@ -294,4 +329,5 @@ function initInterpreterWebapi(interpreter, scope) {
   initInterpreterWebapiTurnRight(interpreter, scope);
   initInterpreterWebapiTurnLeft(interpreter, scope);
   initInterpreterWebapiTurnFront(interpreter, scope);
+  initInterpreterWebapiIrGun(interpreter, scope);
 }

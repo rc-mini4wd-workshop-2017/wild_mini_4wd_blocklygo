@@ -22,3 +22,5 @@ Blockly.Msg.WEBAPI_DRIVE_HIGH      = "速く";
 Blockly.Msg.WEBAPI_TURN_RIGHT_MESSAGE = "右にハンドルをきる";
 Blockly.Msg.WEBAPI_TURN_LEFT_MESSAGE  = "左にハンドルをきる";
 Blockly.Msg.WEBAPI_TURN_FRONT_MESSAGE = "ハンドルを戻す";
+
+Blockly.Msg.WEBAPI_IRGUN_MESSAGE   = "大砲を撃つ";

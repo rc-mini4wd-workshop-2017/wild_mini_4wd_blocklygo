@@ -31,6 +31,7 @@ func main() {
 	router.PUT("/v1/turnleft", goparts.Left)
 	router.PUT("/v1/turnright", goparts.Right)
 	router.PUT("/v1/servo/:command", goparts.Servo)
+	router.PUT("/v1/irgun", goparts.IrGun)
 	log.Print("Server Start..")
 	port := ":8080"
 	log.Fatalf("listen serve error[%s]: %v\n", port, http.ListenAndServe(port, router))

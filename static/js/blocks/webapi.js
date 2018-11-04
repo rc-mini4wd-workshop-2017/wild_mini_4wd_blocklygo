@@ -219,3 +219,20 @@ Blockly.Blocks['webapi_turnfront'] = {
   }
 };
 
+Blockly.Blocks['webapi_irgun'] = {
+  /**
+   * Block for webapi irgun statement.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "%{BKY_WEBAPI_IRGUN_MESSAGE}",
+      "args0": null,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 60,
+      "tooltip": "Execute Web API v1/irgun",
+      "helpUrl": null
+    });
+  }
+};

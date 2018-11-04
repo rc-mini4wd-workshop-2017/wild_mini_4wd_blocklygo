@@ -24,3 +24,8 @@ func LedOff(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 func Log(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	ExecCommand(w, "log")
 }
+
+func IrGun(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	ExecCommand(w, "fire_led_gun 26")
+}
+
