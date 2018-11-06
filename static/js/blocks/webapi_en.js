@@ -1,3 +1,6 @@
+Blockly.Msg.CATEGORY_LOOP           = "Loop";
+Blockly.Msg.CATEGORY_CONTROL        = "Control";
+
 Blockly.Msg.CATEGORY_GO             = "Go";
 Blockly.Msg.CATEGORY_STEERING_WHEEL = "Steering wheel";
 Blockly.Msg.CATEGORY_ELSE           = "else";
@@ -23,4 +26,6 @@ Blockly.Msg.WEBAPI_TURN_RIGHT_MESSAGE = "Turn the steering wheel to the right";
 Blockly.Msg.WEBAPI_TURN_LEFT_MESSAGE  = "Turn the steering wheel to the left";
 Blockly.Msg.WEBAPI_TURN_FRONT_MESSAGE = "Return the steering wheel";
 
-Blockly.Msg.WEBAPI_IRGUN_MESSAGE   = "Shoot the cannon";
+Blockly.Msg.WEBAPI_IRGUN_MESSAGE   = "Shoot the gun";
+
+Blockly.Msg.WEBAPI_DISTANCE_MESSAGE   = "Distance to obstacles";

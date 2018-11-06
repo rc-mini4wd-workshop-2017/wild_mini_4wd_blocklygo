@@ -29,3 +29,6 @@ func IrGun(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	ExecCommand(w, "fire_led_gun 26")
 }
 
+func Distance(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	ExecCommand(w, "get_distance")
+}

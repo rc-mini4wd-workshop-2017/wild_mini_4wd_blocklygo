@@ -236,3 +236,22 @@ Blockly.Blocks['webapi_irgun'] = {
     });
   }
 };
+
+Blockly.Blocks['webapi_distance'] = {
+  /**
+   * Block for webapi distance statement.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "%{BKY_WEBAPI_DISTANCE_MESSAGE}",
+      "args0": null,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 260,
+      "tooltip": "Execute Web API v1/distance",
+      "helpUrl": null,
+      "output": "Boolean"
+    });
+  }
+};

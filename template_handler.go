@@ -11,6 +11,7 @@ type templateHandler struct {
 	once     sync.Once
 	filename string
 	Lang     string
+	Mode     string
 	templ    *template.Template
 }
 

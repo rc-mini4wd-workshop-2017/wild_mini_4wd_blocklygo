@@ -1,3 +1,6 @@
+Blockly.Msg.CATEGORY_LOOP           = "繰り返し";
+Blockly.Msg.CATEGORY_CONTROL        = "コントロール";
+
 Blockly.Msg.CATEGORY_GO             = "進む";
 Blockly.Msg.CATEGORY_STEERING_WHEEL = "ハンドル";
 Blockly.Msg.CATEGORY_ELSE           = "その他";
@@ -23,4 +26,6 @@ Blockly.Msg.WEBAPI_TURN_RIGHT_MESSAGE = "右にハンドルをきる";
 Blockly.Msg.WEBAPI_TURN_LEFT_MESSAGE  = "左にハンドルをきる";
 Blockly.Msg.WEBAPI_TURN_FRONT_MESSAGE = "ハンドルを戻す";
 
-Blockly.Msg.WEBAPI_IRGUN_MESSAGE   = "大砲を撃つ";
+Blockly.Msg.WEBAPI_IRGUN_MESSAGE   = "銃を撃つ";
+
+Blockly.Msg.WEBAPI_DISTANCE_MESSAGE   = "障害物までの距離";

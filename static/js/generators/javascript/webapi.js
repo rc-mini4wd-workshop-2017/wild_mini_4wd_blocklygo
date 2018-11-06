@@ -316,6 +316,40 @@ function initInterpreterWebapiIrGun(interpreter, scope) {
   interpreter.setProperty(scope, 'webapiIrGun', wrapper);
 }
 
+Blockly.JavaScript['webapi_distance'] = function(block) {
+  // Print statement.
+  var msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
+      Blockly.JavaScript.ORDER_NONE) || '\'\'';
+
+  return 'webapiDistance();\n';
+};
+
+function initInterpreterWebapiDistance(interpreter, scope) {
+  // Ensure function name does not conflict with variable names.
+  Blockly.JavaScript.addReservedWords('webapiDistance');
+  var wrapper = interpreter.createAsyncFunction(
+    function(callback) {
+      var url = webapiPrefix + '/distance';
+      window.alert("distance< url: " + url);
+
+      // Delay the call to the callback.
+      $.ajax({
+        type: 'PUT',
+        url: url,
+        dataType: 'text',
+        data: '',
+        success: function(text, status, xhr){
+          window.alert("distance> " + text);
+          callback();
+        },
+        error: function(xhr){
+          window.alert("distance> error: " + xhr.status);
+          window.alert("distance> " + xhr.responseText);
+        }
+      });
+    });
+  interpreter.setProperty(scope, 'webapiDistance', wrapper);
+}
 
 /**
  * Register the interpreter asynchronous webapi functions
@@ -330,4 +364,5 @@ function initInterpreterWebapi(interpreter, scope) {
   initInterpreterWebapiTurnLeft(interpreter, scope);
   initInterpreterWebapiTurnFront(interpreter, scope);
   initInterpreterWebapiIrGun(interpreter, scope);
+  initInterpreterWebapiDistance(interpreter, scope);
 }

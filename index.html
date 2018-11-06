@@ -3,10 +3,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
 {{ if eq (.Lang) ("ja") }}
-<title>ミニ四駆で障害を乗り越えろ</title>
+<title>ミニ四駆で障害を乗り越えろ{{ if eq (.Mode) ("hard")}}[難しい]{{ end }}</title>
 {{ end }}
 {{ if eq (.Lang) ("en") }}
-<title>Operate Mini-4WD, and clear the course!!!</title>
+<title>Operate Mini-4WD, and clear the course!!!{{ if eq (.Mode) ("hard")}}[Hard]{{ end }}</title>
 {{ end }}
 <link href="static/css/bootstrap.min.css" rel="stylesheet" />
 <script type="text/javascript" src="static/js/jquery.js"></script>
@@ -43,10 +43,10 @@
         <span class="icon-bar"></span>
       </button>
 {{ if eq (.Lang) ("ja") }}
-      <a class="navbar-brand" href=".">ミニ四駆で障害を乗り越えろ</a>
+      <a class="navbar-brand" href=".">ミニ四駆で障害を乗り越えろ{{ if eq (.Mode) ("hard")}}[難しい]{{ end }}</a>
 {{ end }}
 {{ if eq (.Lang) ("en") }}
-      <a class="navbar-brand" href="index_en.html">Operate Mini-4WD, and clear the course!!!</a>
+      <a class="navbar-brand" href="index_en.html">Operate Mini-4WD, and clear the course!!!{{ if eq (.Mode) ("hard")}}[Hard]{{ end }}</a>
 {{ end }}
     </div>
 
@@ -60,8 +60,34 @@
           <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language</a>
 {{ end }}
           <ul class="dropdown-menu">
+{{ if eq (.Mode) ("normal")}}
             <li ><a href="index.html">日本語</a></li>
             <li ><a href="index_en.html">English</a></li>
+{{ end }}
+{{ if eq (.Mode) ("hard")}}
+            <li ><a href="index_hard.html">日本語</a></li>
+            <li ><a href="index_en_hard.html">English</a></li>
+{{ end }}
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+{{ if eq (.Lang) ("ja") }}
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">モード</a>
+{{ end }}
+{{ if eq (.Lang) ("en") }}
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mode</a>
+{{ end }}
+          <ul class="dropdown-menu">
+{{ if eq (.Lang) ("ja") }}
+            <li ><a href="index.html">普通</a></li>
+            <li ><a href="index_hard.html">難しい</a></li>
+{{ end }}
+{{ if eq (.Lang) ("en") }}
+            <li ><a href="index_en.html">Normal</a></li>
+            <li ><a href="index_en_hard.html">Hard</a></li>
+{{ end }}
           </ul>
         </li>
       </ul>
@@ -113,7 +139,21 @@
 </div>
 
 <xml id="toolbox" style="display: none">
+{{ if eq (.Mode) ("hard")}}
+  <category name="%{BKY_CATEGORY_LOOP}">
+    <block type="controls_repeat_ext"></block>
+    <block type="controls_repeat"></block>
+    <block type="controls_whileUntil"></block>
+    <block type="controls_for"></block>
+    <block type="controls_forEach"></block>
+    <block type="controls_flow_statements"></block>
+  </category>
 
+  <category name="%{BKY_CATEGORY_CONTROL}">
+    <block type="controls_if"></block>
+    <block type="webapi_distance"></block>
+  </category>
+{{ end }}
   <!-- *** ドライブ Block *** -->
   <category name="%{BKY_CATEGORY_GO}">
     <block type="webapi_forward">

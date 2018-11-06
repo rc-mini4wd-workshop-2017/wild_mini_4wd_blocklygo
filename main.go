@@ -16,11 +16,15 @@ func main() {
 
 	router := httprouter.New()
 	router.Handler("GET", "/",
-		&templateHandler{filename: "index.html", Lang: "ja"})
+		&templateHandler{filename: "index.html", Lang: "ja", Mode: "normal"})
 	router.Handler("GET", "/index.html",
-		&templateHandler{filename: "index.html", Lang: "ja"})
+		&templateHandler{filename: "index.html", Lang: "ja", Mode: "normal"})
 	router.Handler("GET", "/index_en.html",
-		&templateHandler{filename: "index.html", Lang: "en"})
+		&templateHandler{filename: "index.html", Lang: "en", Mode: "normal"})
+	router.Handler("GET", "/index_hard.html",
+		&templateHandler{filename: "index.html", Lang: "ja", Mode: "hard"})
+	router.Handler("GET", "/index_en_hard.html",
+		&templateHandler{filename: "index.html", Lang: "en", Mode: "hard"})
 	router.ServeFiles("/static/*filepath", http.Dir("static"))
 	router.PUT("/v1/info", goparts.Info)
 	router.PUT("/v1/forward/:command/:option", goparts.Forward)
@@ -32,6 +36,7 @@ func main() {
 	router.PUT("/v1/turnright", goparts.Right)
 	router.PUT("/v1/servo/:command", goparts.Servo)
 	router.PUT("/v1/irgun", goparts.IrGun)
+	router.PUT("/v1/distance", goparts.Distance)
 	log.Print("Server Start..")
 	port := ":8080"
 	log.Fatalf("listen serve error[%s]: %v\n", port, http.ListenAndServe(port, router))
