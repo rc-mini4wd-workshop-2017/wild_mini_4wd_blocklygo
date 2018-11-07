@@ -1,4 +1,5 @@
 Blockly.Msg.CATEGORY_LOOP           = "Loop";
+Blockly.Msg.CATEGORY_LOGIC          = "Logic";
 Blockly.Msg.CATEGORY_CONTROL        = "Control";
 
 Blockly.Msg.CATEGORY_GO             = "Go";

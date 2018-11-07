@@ -246,12 +246,10 @@ Blockly.Blocks['webapi_distance'] = {
     this.jsonInit({
       "message0": "%{BKY_WEBAPI_DISTANCE_MESSAGE}",
       "args0": null,
-      "previousStatement": null,
-      "nextStatement": null,
-      "colour": 260,
+      "colour": 230,
       "tooltip": "Execute Web API v1/distance",
       "helpUrl": null,
-      "output": "Boolean"
+      "output": null
     });
   }
 };
