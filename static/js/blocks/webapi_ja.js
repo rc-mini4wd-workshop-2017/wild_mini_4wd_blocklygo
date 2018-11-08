@@ -1,6 +1,7 @@
 Blockly.Msg.CATEGORY_LOOP           = "繰り返し";
 Blockly.Msg.CATEGORY_LOGIC          = "論理";
 Blockly.Msg.CATEGORY_CONTROL        = "コントロール";
+Blockly.Msg.CATEGORY_DISTANCE       = "距離";
 
 Blockly.Msg.CATEGORY_GO             = "進む";
 Blockly.Msg.CATEGORY_STEERING_WHEEL = "ハンドル";

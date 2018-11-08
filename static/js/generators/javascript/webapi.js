@@ -340,11 +340,12 @@ function initInterpreterWebapiDistance(interpreter, scope) {
         data: '',
         success: function(text, status, xhr){
           window.alert("distance> " + text);
-          callback();
+          callback(parseInt(text,10));
         },
         error: function(xhr){
           window.alert("distance> error: " + xhr.status);
           window.alert("distance> " + xhr.responseText);
+          callback(xtr.responseText);
         }
       });
     });

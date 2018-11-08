@@ -142,25 +142,35 @@
 {{ if eq (.Mode) ("hard")}}
   <!-- *** ループ Block *** -->
   <category name="%{BKY_CATEGORY_LOOP}">
-    <block type="controls_repeat_ext"></block>
+<!--    <block type="controls_repeat_ext"></block> -->
     <block type="controls_repeat"></block>
     <block type="controls_whileUntil"></block>
-    <block type="controls_for"></block>
-    <block type="controls_forEach"></block>
+<!--    <block type="controls_for"></block>-->
+<!--    <block type="controls_forEach"></block>-->
     <block type="controls_flow_statements"></block>
   </category>
   <!-- *** 論理系 Block *** -->
   <category name="%{BKY_CATEGORY_LOGIC}">
     <block type="logic_compare"></block>
-    <block type="logic_operation"></block>
-    <block type="logic_boolean"></block>
-    <block type="math_number"><field name="NUM">10</field></block>
+<!--    <block type="logic_operation"></block> -->
+<!--    <block type="logic_boolean"></block> -->
   </category>
   <!-- *** 制御系 Block *** -->
   <category name="%{BKY_CATEGORY_CONTROL}">
     <block type="controls_if"></block>
     <block type="webapi_distance"></block>
     <block type="wait_seconds"></block>
+  </category>
+  <!-- *** 距離 Block *** -->
+  <category name="%{BKY_CATEGORY_DISTANCE}"+"cm">
+    <block type="math_number"><field name="NUM">5</field></block>
+    <block type="math_number"><field name="NUM">10</field></block>
+    <block type="math_number"><field name="NUM">20</field></block>
+    <block type="math_number"><field name="NUM">30</field></block>
+    <block type="math_number"><field name="NUM">40</field></block>
+    <block type="math_number"><field name="NUM">50</field></block>
+    <block type="math_number"><field name="NUM">100</field></block>
+    <block type="math_number"><field name="NUM">200</field></block>
   </category>
 {{ end }}
   <!-- *** ドライブ Block *** -->
