@@ -5,9 +5,9 @@
 package main
 
 import (
-	"./goparts"
 	"github.com/julienschmidt/httprouter"
 	"log"
+	"main/goparts"
 	"net/http"
 )
 
