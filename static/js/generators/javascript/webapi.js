@@ -281,6 +281,42 @@ function initInterpreterWebapiTurnFront(interpreter, scope) {
   interpreter.setProperty(scope, 'webapiTurnFront', wrapper);
 }
 
+Blockly.JavaScript['webapi_servo'] = function(block) {
+  // Print statement.
+  var angle = block.getFieldValue('angle');
+  var args = '\'' + angle + '\'';
+  return 'webapiServo(' + args + ');\n';
+};
+
+function initInterpreterWebapiServo(interpreter, scope) {
+  // Ensure function name does not conflict with variable names.
+  Blockly.JavaScript.addReservedWords('webapiServo');
+  var wrapper = interpreter.createAsyncFunction(
+    function(angle, callback) {
+      var url = webapiPrefix + '/servo/' + angle;
+      window.alert("servo< url: " + url);
+      window.alert("servo< angle: " + angle);
+
+      // Delay the call to the callback.
+      $.ajax({
+        type: 'PUT',
+        url: url,
+        dataType: 'text',
+        data: '',
+        success: function(text, status, xhr){
+          window.alert("servo> " + text);
+          callback();
+        },
+        error: function(xhr){
+          window.alert("servo> error: " + xhr.status);
+          window.alert("servo> " + xhr.responseText);
+          callback();
+        }
+      });
+    });
+  interpreter.setProperty(scope, 'webapiServo', wrapper);
+}
+
 Blockly.JavaScript['webapi_irgun'] = function(block) {
   // Print statement.
   var msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
@@ -364,6 +400,7 @@ function initInterpreterWebapi(interpreter, scope) {
   initInterpreterWebapiTurnRight(interpreter, scope);
   initInterpreterWebapiTurnLeft(interpreter, scope);
   initInterpreterWebapiTurnFront(interpreter, scope);
+  initInterpreterWebapiServo(interpreter, scope);
   initInterpreterWebapiIrGun(interpreter, scope);
   initInterpreterWebapiDistance(interpreter, scope);
 }

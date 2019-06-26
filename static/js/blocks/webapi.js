@@ -219,6 +219,40 @@ Blockly.Blocks['webapi_turnfront'] = {
   }
 };
 
+Blockly.Blocks['webapi_servo'] = {
+  /**
+   * Block for webapi servo statement.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "%{BKY_WEBAPI_SERVO_MESSAGE}",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "angle",
+          "options": [
+              ["60", "60"],
+              ["65", "65"],
+              ["70", "70"],
+              ["75", "75"],
+              ["80", "80"],
+              ["85", "85"],
+              ["90", "90"],
+              ["95", "95"],
+              ["100", "100"],
+          ],
+        },
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 60,
+      "tooltip": "Execute Web API v1/servo",
+      "helpUrl": null
+    });
+  }
+};
+
 Blockly.Blocks['webapi_irgun'] = {
   /**
    * Block for webapi irgun statement.

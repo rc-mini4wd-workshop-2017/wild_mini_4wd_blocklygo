@@ -28,6 +28,8 @@ Blockly.Msg.WEBAPI_TURN_RIGHT_MESSAGE = "右にハンドルをきる";
 Blockly.Msg.WEBAPI_TURN_LEFT_MESSAGE  = "左にハンドルをきる";
 Blockly.Msg.WEBAPI_TURN_FRONT_MESSAGE = "ハンドルを戻す";
 
+Blockly.Msg.WEBAPI_SERVO_MESSAGE   = "ハンドルをきる(%1°)";
+
 Blockly.Msg.WEBAPI_IRGUN_MESSAGE   = "銃を撃つ";
 
 Blockly.Msg.WEBAPI_DISTANCE_MESSAGE   = "障害物までの距離";
