@@ -27,7 +27,7 @@
  */
 Blockly.defineBlocksWithJsonArray([{
   "type": "wait_seconds",
-  "message0": " wait %1 seconds",
+  "message0": "%{BKY_WAIT_MESSAGE}",
   "args0": [{
     "type": "field_number",
     "name": "SECONDS",
