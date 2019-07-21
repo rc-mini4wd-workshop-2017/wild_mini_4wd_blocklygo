@@ -1,5 +1,12 @@
 # Wild MINI4WD blockly go
 
+## How to build
+
+```
+$ cd /home/pi/workspace/wild_mini_4wd_blocklygo
+$ GO111MODULE=off go build
+```
+
 ## How to install
 
 ```
