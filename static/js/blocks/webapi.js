@@ -288,7 +288,7 @@ Blockly.Blocks['webapi_distance'] = {
       "colour": 230,
       "tooltip": "Execute Web API v1/distance",
       "helpUrl": null,
-      "output": null
+      "output": "Number"
     });
   }
 };

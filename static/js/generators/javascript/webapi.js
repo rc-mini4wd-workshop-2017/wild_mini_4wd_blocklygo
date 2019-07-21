@@ -376,7 +376,12 @@ function initInterpreterWebapiDistance(interpreter, scope) {
         data: '',
         success: function(text, status, xhr){
           window.alert("distance> " + text);
-          callback(parseInt(text,10));
+          var r = text.match(/result: (-?[0-9]+)/m)
+          if (r == null) {
+            callback(-1);
+          } else {
+            callback(parseInt(r[1],10));
+          }
         },
         error: function(xhr){
           window.alert("distance> error: " + xhr.status);
