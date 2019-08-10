@@ -142,8 +142,7 @@
 
 <xml id="toolbox" style="display: none">
 {{ if eq (.Mode) ("hard")}}
-  <category name="Variables" custom="VARIABLE"></category>
-  <!-- *** ループ Block *** -->
+  <category name="%{BKY_CATEGORY_VARIABLE}" custom="VARIABLE"></category>
   <category name="%{BKY_CATEGORY_LOOP}">
 <!--    <block type="controls_repeat_ext"></block> -->
     <block type="controls_repeat"><field name="TIMES">1</field></block>
@@ -154,23 +153,21 @@
 <!--    <block type="controls_forEach"></block>-->
     <block type="controls_flow_statements"></block>
   </category>
-  <!-- *** 論理系 Block *** -->
   <category name="%{BKY_CATEGORY_LOGIC}">
     <block type="logic_compare"></block>
 <!--    <block type="logic_operation"></block> -->
 <!--    <block type="logic_boolean"></block> -->
   </category>
-  <!-- *** 制御系 Block *** -->
   <category name="%{BKY_CATEGORY_CONTROL}">
     <block type="controls_if"></block>
-    <block type="webapi_distance"></block>
+    </block>
+  </category>
+  <category name="%{BKY_CATEGORY_WAIT}">
     <block type="wait_seconds"><field name="SECONDS">1</field></block>
     <block type="wait_seconds"><field name="SECONDS">3</field></block>
     <block type="wait_seconds"><field name="SECONDS">5</field></block>
-    </block>
   </category>
-  <!-- *** 距離 Block *** -->
-  <category name="%{BKY_CATEGORY_DISTANCE}"+"cm">
+  <category name="%{BKY_CATEGORY_NUMBER}">
     <block type="math_number"><field name="NUM">5</field></block>
     <block type="math_number"><field name="NUM">10</field></block>
     <block type="math_number"><field name="NUM">20</field></block>
@@ -180,35 +177,32 @@
     <block type="math_number"><field name="NUM">100</field></block>
     <block type="math_number"><field name="NUM">200</field></block>
   </category>
-{{ end }}
-  <!-- *** ドライブ Block *** -->
-  <category name="%{BKY_CATEGORY_GO}">
-    <block type="webapi_forward">
-    </block>
-    <block type="webapi_back">
-    </block>
-    <block type="webapi_drive">
-    </block>
-  </category>
-
-  <!-- *** ハンドル Block *** -->
-  <category name="%{BKY_CATEGORY_STEERING_WHEEL}">
-    <block type="webapi_turnright">
-    </block>
-    <block type="webapi_turnleft">
-    </block>
-    <block type="webapi_turnfront">
-    </block>
-    <block type="webapi_servo">
-    </block>
-  </category>
-
-
-  <category name="%{BKY_CATEGORY_ELSE}">
-    <block type="webapi_irgun"></block>
+  <category name="%{BKY_CATEGORY_MINI_4WD}">
+    <block type="webapi_forward"></block>
+    <block type="webapi_back"></block>
+    <block type="webapi_drive"></block>
+    <block type="webapi_turnright"></block>
+    <block type="webapi_turnleft"></block>
+    <block type="webapi_turnfront"></block>
+    <block type="webapi_servo"></block>
+    <!-- <block type="webapi_irgun"></block> -->
     <block type="webapi_info"></block>
+    <block type="webapi_distance"></block>
   </category>
-
+{{ else }}
+  <category name="%{BKY_CATEGORY_MINI_4WD}">
+    <block type="webapi_forward"></block>
+    <block type="webapi_back"></block>
+    <block type="webapi_drive"></block>
+    <block type="webapi_turnright"></block>
+    <block type="webapi_turnleft"></block>
+    <block type="webapi_turnfront"></block>
+    <block type="webapi_servo"></block>
+    <!-- <block type="webapi_irgun"></block> -->
+    <block type="webapi_info"></block>
+    <block type="webapi_distance"></block>
+  </category>
+{{ end }}
 </xml>
 <xml id="startBlocks" style="display: none">
   <block type="webapi_turnfront" x=30 y=0><next>

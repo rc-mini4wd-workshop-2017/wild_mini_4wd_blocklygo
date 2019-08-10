@@ -1,11 +1,10 @@
+Blockly.Msg.CATEGORY_VARIABLE       = "変数";
 Blockly.Msg.CATEGORY_LOOP           = "繰り返し";
 Blockly.Msg.CATEGORY_LOGIC          = "論理";
 Blockly.Msg.CATEGORY_CONTROL        = "コントロール";
-Blockly.Msg.CATEGORY_DISTANCE       = "距離";
+Blockly.Msg.CATEGORY_NUMBER         = "数";
 
-Blockly.Msg.CATEGORY_GO             = "進む";
-Blockly.Msg.CATEGORY_STEERING_WHEEL = "ハンドル";
-Blockly.Msg.CATEGORY_ELSE           = "その他";
+Blockly.Msg.CATEGORY_MINI_4WD       = "ミニ四駆";
 
 Blockly.Msg.WEBAPI_INFO_MESSAGE    = "バージョン取得";
 

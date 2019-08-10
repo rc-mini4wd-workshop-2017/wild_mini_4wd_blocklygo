@@ -285,7 +285,7 @@ Blockly.Blocks['webapi_distance'] = {
     this.jsonInit({
       "message0": "%{BKY_WEBAPI_DISTANCE_MESSAGE}",
       "args0": null,
-      "colour": 230,
+      "colour": 60,
       "tooltip": "Execute Web API v1/distance",
       "helpUrl": null,
       "output": "Number"

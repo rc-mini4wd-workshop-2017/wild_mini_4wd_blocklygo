@@ -1,11 +1,10 @@
+Blockly.Msg.CATEGORY_VARIABLE       = "Variable";
 Blockly.Msg.CATEGORY_LOOP           = "Loop";
 Blockly.Msg.CATEGORY_LOGIC          = "Logic";
 Blockly.Msg.CATEGORY_CONTROL        = "Control";
-Blockly.Msg.CATEGORY_DISTANCE       = "Distance";
+Blockly.Msg.CATEGORY_NUMBER         = "Number";
 
-Blockly.Msg.CATEGORY_GO             = "Go";
-Blockly.Msg.CATEGORY_STEERING_WHEEL = "Steering wheel";
-Blockly.Msg.CATEGORY_ELSE           = "else";
+Blockly.Msg.CATEGORY_MINI_4WD       = "MINI 4WD";
 
 Blockly.Msg.WEBAPI_INFO_MESSAGE    = "Get version";
 
