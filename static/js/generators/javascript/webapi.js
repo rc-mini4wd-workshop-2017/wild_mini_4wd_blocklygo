@@ -35,6 +35,42 @@ function initInterpreterWebapiInfo(interpreter, scope) {
   interpreter.setProperty(scope, 'webapiInfo', wrapper);
 }
 
+Blockly.JavaScript['webapi_go_forward'] = function(block) {
+  // Print statement.
+  var speed = block.getFieldValue('speed');
+  var args = '\'' + speed + '\'';
+  return 'webapiGoForward(' + args + ');\n';
+};
+
+function initInterpreterWebapiGoForward(interpreter, scope) {
+  // Ensure function name does not conflict with variable names.
+  Blockly.JavaScript.addReservedWords('webapiGoForward');
+  var wrapper = interpreter.createAsyncFunction(
+    function(speed, callback) {
+      var url = webapiPrefix + '/go_forward/' + speed;
+      window.alert("go_forward< url: " + url);
+      window.alert("go_forward< speed: " + speed);
+
+      // Delay the call to the callback.
+      $.ajax({
+        type: 'PUT',
+        url: url,
+        dataType: 'text',
+        data: speed,
+        success: function(text, status, xhr){
+          window.alert("go_forward> " + text);
+          callback();
+        },
+        error: function(xhr){
+          window.alert("go_forward> error: " + xhr.status);
+          window.alert("go_forward> " + xhr.responseText);
+          callback();
+        }
+      });
+    });
+  interpreter.setProperty(scope, 'webapiGoForward', wrapper);
+}
+
 Blockly.JavaScript['webapi_forward'] = function(block) {
   // Print statement.
   var command = block.getFieldValue('command');
@@ -71,6 +107,42 @@ function initInterpreterWebapiForward(interpreter, scope) {
       });
     });
   interpreter.setProperty(scope, 'webapiForward', wrapper);
+}
+
+Blockly.JavaScript['webapi_go_back'] = function(block) {
+  // Print statement.
+  var speed = block.getFieldValue('speed');
+  var args = '\'' + speed + '\'';
+  return 'webapiGoBack(' + args + ');\n';
+};
+
+function initInterpreterWebapiGoBack(interpreter, scope) {
+  // Ensure function name does not conflict with variable names.
+  Blockly.JavaScript.addReservedWords('webapiGoBack');
+  var wrapper = interpreter.createAsyncFunction(
+    function(speed, callback) {
+      var url = webapiPrefix + '/go_back/' + speed;
+      window.alert("go_back< url: " + url);
+      window.alert("go_back< speed: " + speed);
+
+      // Delay the call to the callback.
+      $.ajax({
+        type: 'PUT',
+        url: url,
+        dataType: 'text',
+        data: speed,
+        success: function(text, status, xhr){
+          window.alert("go_back> " + text);
+          callback();
+        },
+        error: function(xhr){
+          window.alert("go_back> error: " + xhr.status);
+          window.alert("go_back> " + xhr.responseText);
+          callback();
+        }
+      });
+    });
+  interpreter.setProperty(scope, 'webapiGoBack', wrapper);
 }
 
 Blockly.JavaScript['webapi_back'] = function(block) {
@@ -357,7 +429,7 @@ Blockly.JavaScript['webapi_distance'] = function(block) {
   var msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
       Blockly.JavaScript.ORDER_NONE) || '\'\'';
 
-  return 'webapiDistance();\n';
+  return 'webapiDistance()';
 };
 
 function initInterpreterWebapiDistance(interpreter, scope) {
@@ -398,7 +470,9 @@ function initInterpreterWebapiDistance(interpreter, scope) {
  */
 function initInterpreterWebapi(interpreter, scope) {
   initInterpreterWebapiInfo(interpreter, scope);
+  initInterpreterWebapiGoForward(interpreter, scope);
   initInterpreterWebapiForward(interpreter, scope);
+  initInterpreterWebapiGoBack(interpreter, scope);
   initInterpreterWebapiBack(interpreter, scope);
   initInterpreterWebapiStop(interpreter, scope);
   initInterpreterWebapiDrive(interpreter, scope);

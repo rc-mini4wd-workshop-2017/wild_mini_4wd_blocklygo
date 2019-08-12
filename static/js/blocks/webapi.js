@@ -16,6 +16,34 @@ Blockly.Blocks['webapi_info'] = {
   }
 };
 
+Blockly.Blocks['webapi_go_forward'] = {
+  /**
+   * Block for webapi forward statement.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "%{BKY_WEBAPI_GO_FORWARD_MESSAGE}",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "speed",
+          "options": [
+              ["%{BKY_WEBAPI_FORWARD_SLOW}", "slow"],
+              ["%{BKY_WEBAPI_FORWARD_NORMAL}", "normal"],
+              ["%{BKY_WEBAPI_FORWARD_HIGH}", "high"],
+          ]
+        },
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 60,
+      "tooltip": "Execute Web API v1/go_forward/normal",
+      "helpUrl": null
+    });
+  }
+};
+
 Blockly.Blocks['webapi_forward'] = {
   /**
    * Block for webapi forward statement.
@@ -54,6 +82,34 @@ Blockly.Blocks['webapi_forward'] = {
       "nextStatement": null,
       "colour": 60,
       "tooltip": "Execute Web API v1/forward/normal",
+      "helpUrl": null
+    });
+  }
+};
+
+Blockly.Blocks['webapi_go_back'] = {
+  /**
+   * Block for webapi forward statement.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "%{BKY_WEBAPI_GO_BACK_MESSAGE}",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "speed",
+          "options": [
+              ["%{BKY_WEBAPI_BACK_SLOW}", "slow"],
+              ["%{BKY_WEBAPI_BACK_NORMAL}", "normal"],
+              ["%{BKY_WEBAPI_BACK_HIGH}", "high"],
+          ]
+        },
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 60,
+      "tooltip": "Execute Web API v1/go_back/normal",
       "helpUrl": null
     });
   }
@@ -154,7 +210,7 @@ Blockly.Blocks['webapi_stop'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "stop",
+      "message0": "%{BKY_WEBAPI_STOP_MESSAGE}",
       "args0": null,
       "previousStatement": null,
       "nextStatement": null,
