@@ -142,32 +142,32 @@
 
 <xml id="toolbox" style="display: none">
 {{ if eq (.Mode) ("hard")}}
-  <category name="%{BKY_CATEGORY_VARIABLE}" custom="VARIABLE"></category>
+<!--   <category name="%{BKY_CATEGORY_VARIABLE}" custom="VARIABLE"></category> -->
   <category name="%{BKY_CATEGORY_LOOP}">
 <!--    <block type="controls_repeat_ext"></block> -->
     <block type="controls_repeat"><field name="TIMES">1</field></block>
     <block type="controls_repeat"><field name="TIMES">3</field></block>
     <block type="controls_repeat"><field name="TIMES">5</field></block>
-    <block type="controls_whileUntil"></block>
+<!--     <block type="controls_whileUntil"></block> -->
 <!--    <block type="controls_for"></block>-->
 <!--    <block type="controls_forEach"></block>-->
-    <block type="controls_flow_statements"></block>
+<!--     <block type="controls_flow_statements"></block> -->
   </category>
-  <category name="%{BKY_CATEGORY_LOGIC}">
-    <block type="logic_compare"></block>
+<!--   <category name="%{BKY_CATEGORY_LOGIC}"> -->
+<!--     <block type="logic_compare"></block> -->
 <!--    <block type="logic_operation"></block> -->
 <!--    <block type="logic_boolean"></block> -->
-  </category>
-  <category name="%{BKY_CATEGORY_CONTROL}">
-    <block type="controls_if"></block>
-    </block>
-  </category>
+<!--   </category> -->
+<!--   <category name="%{BKY_CATEGORY_CONTROL}"> -->
+<!--     <block type="controls_if"></block> -->
+<!--     </block> -->
+<!--   </category> -->
   <category name="%{BKY_CATEGORY_WAIT}">
     <block type="wait_seconds"><field name="SECONDS">1</field></block>
     <block type="wait_seconds"><field name="SECONDS">3</field></block>
     <block type="wait_seconds"><field name="SECONDS">5</field></block>
   </category>
-  <category name="%{BKY_CATEGORY_NUMBER}">
+  <!-- <category name="%{BKY_CATEGORY_NUMBER}">
     <block type="math_number"><field name="NUM">5</field></block>
     <block type="math_number"><field name="NUM">10</field></block>
     <block type="math_number"><field name="NUM">20</field></block>
@@ -176,7 +176,7 @@
     <block type="math_number"><field name="NUM">50</field></block>
     <block type="math_number"><field name="NUM">100</field></block>
     <block type="math_number"><field name="NUM">200</field></block>
-  </category>
+  </category> -->
   <category name="%{BKY_CATEGORY_MINI_4WD}">
     <block type="webapi_forward"></block>
     <block type="webapi_back"></block>
@@ -190,7 +190,7 @@
     <block type="webapi_servo"></block>
     <!-- <block type="webapi_irgun"></block> -->
     <block type="webapi_info"></block>
-    <block type="webapi_distance"></block>
+    <!-- <block type="webapi_distance"></block> -->
   </category>
 {{ else }}
   <category name="%{BKY_CATEGORY_MINI_4WD}">
@@ -203,7 +203,7 @@
     <block type="webapi_servo"></block>
     <!-- <block type="webapi_irgun"></block> -->
     <block type="webapi_info"></block>
-    <block type="webapi_distance"></block>
+    <!-- <block type="webapi_distance"></block> -->
   </category>
 {{ end }}
 </xml>
