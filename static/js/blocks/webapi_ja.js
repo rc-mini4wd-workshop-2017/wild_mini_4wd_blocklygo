@@ -1,4 +1,4 @@
-Blockly.Msg.CATEGORY_VARIABLE       = "変数";
+Blockly.Msg.CATEGORY_VARIABLE       = "へんすう";
 Blockly.Msg.CATEGORY_LOOP           = "くりかえし";
 Blockly.Msg.CATEGORY_LOGIC          = "ろんり";
 Blockly.Msg.CATEGORY_CONTROL        = "コントロール";
@@ -30,7 +30,7 @@ Blockly.Msg.WEBAPI_DRIVE_HIGH      = "はやく";
 Blockly.Msg.WEBAPI_STOP_MESSAGE    = "とまる";
 
 Blockly.Msg.WEBAPI_TURN_RIGHT_MESSAGE = "右にハンドルをまわす";
-Blockly.Msg.WEBAPI_TURN_LEFT_MESSAGE  = "左にハンドルをまわる";
+Blockly.Msg.WEBAPI_TURN_LEFT_MESSAGE  = "左にハンドルをまわす";
 Blockly.Msg.WEBAPI_TURN_FRONT_MESSAGE = "ハンドルをもどす";
 
 Blockly.Msg.WEBAPI_SERVO_MESSAGE   = "ハンドルをまわす(%1°)";
