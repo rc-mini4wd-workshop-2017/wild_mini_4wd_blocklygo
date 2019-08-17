@@ -10,14 +10,14 @@ Blockly.Msg.WEBAPI_INFO_MESSAGE    = "バージョン";
 
 Blockly.Msg.WEBAPI_GO_FORWARD_MESSAGE = "%1 まえにすすむ";
 
-Blockly.Msg.WEBAPI_FORWARD_MESSAGE = "%1 秒 %2 まえにすすむ";
+Blockly.Msg.WEBAPI_FORWARD_MESSAGE = "%1 びょう %2 まえにすすむ";
 Blockly.Msg.WEBAPI_FORWARD_SLOW    = "おそく";
 Blockly.Msg.WEBAPI_FORWARD_NORMAL  = "ふつうに";
 Blockly.Msg.WEBAPI_FORWARD_HIGH    = "はやく";
 
 Blockly.Msg.WEBAPI_GO_BACK_MESSAGE = "%1 うしろにすすむ";
 
-Blockly.Msg.WEBAPI_BACK_MESSAGE    = "%1 秒 %2 うしろにすすむ";
+Blockly.Msg.WEBAPI_BACK_MESSAGE    = "%1 びょう %2 うしろにすすむ";
 Blockly.Msg.WEBAPI_BACK_SLOW       = "おそく";
 Blockly.Msg.WEBAPI_BACK_NORMAL     = "ふつうに";
 Blockly.Msg.WEBAPI_BACK_HIGH       = "はやく";
