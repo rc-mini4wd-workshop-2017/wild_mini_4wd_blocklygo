@@ -22,7 +22,7 @@ Blockly.Msg.WEBAPI_BACK_SLOW       = "おそく";
 Blockly.Msg.WEBAPI_BACK_NORMAL     = "ふつうに";
 Blockly.Msg.WEBAPI_BACK_HIGH       = "はやく";
 
-Blockly.Msg.WEBAPI_DRIVE_MESSAGE   = "しょうがいぶつの %1 cmまえまで %2 すすむ";
+Blockly.Msg.WEBAPI_DRIVE_MESSAGE   = "ものの %1 cmまえまで %2 すすむ";
 Blockly.Msg.WEBAPI_DRIVE_SLOW      = "おそく";
 Blockly.Msg.WEBAPI_DRIVE_NORMAL    = "ふつうに";
 Blockly.Msg.WEBAPI_DRIVE_HIGH      = "はやく";
@@ -37,4 +37,4 @@ Blockly.Msg.WEBAPI_SERVO_MESSAGE   = "ハンドルをまわす(%1°)";
 
 Blockly.Msg.WEBAPI_IRGUN_MESSAGE   = "じゅうをうつ";
 
-Blockly.Msg.WEBAPI_DISTANCE_MESSAGE   = "しょうがいぶつ までの きょり";
+Blockly.Msg.WEBAPI_DISTANCE_MESSAGE   = "もの までの きょり";
