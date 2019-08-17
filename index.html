@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
 {{ if eq (.Lang) ("ja") }}
-<title>ミニ四駆で障害を乗り越えろ{{ if eq (.Mode) ("hard")}}[難しい]{{ end }}</title>
+<title>ミニ四駆で障害を乗り越えろ{{ if eq (.Mode) ("hard")}}[むずかしい]{{ end }}</title>
 {{ end }}
 {{ if eq (.Lang) ("en") }}
 <title>Operate Mini-4WD, and clear the course!!!{{ if eq (.Mode) ("hard")}}[Hard]{{ end }}</title>
@@ -45,7 +45,7 @@
         <span class="icon-bar"></span>
       </button>
 {{ if eq (.Lang) ("ja") }}
-      <a class="navbar-brand" href=".">ミニ四駆で障害を乗り越えろ{{ if eq (.Mode) ("hard")}}[難しい]{{ end }}</a>
+      <a class="navbar-brand" href=".">ミニ四駆で障害を乗り越えろ{{ if eq (.Mode) ("hard")}}[むずかしい]{{ end }}</a>
 {{ end }}
 {{ if eq (.Lang) ("en") }}
       <a class="navbar-brand" href="index_en.html">Operate Mini-4WD, and clear the course!!!{{ if eq (.Mode) ("hard")}}[Hard]{{ end }}</a>
@@ -56,18 +56,18 @@
       <ul class="nav navbar-nav">
         <li class="dropdown">
 {{ if eq (.Lang) ("ja") }}
-          <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">言語</a>
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ことば</a>
 {{ end }}
 {{ if eq (.Lang) ("en") }}
           <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language</a>
 {{ end }}
           <ul class="dropdown-menu">
 {{ if eq (.Mode) ("normal")}}
-            <li ><a href="index.html">日本語</a></li>
+            <li ><a href="index.html">にほんご</a></li>
             <li ><a href="index_en.html">English</a></li>
 {{ end }}
 {{ if eq (.Mode) ("hard")}}
-            <li ><a href="index_hard.html">日本語</a></li>
+            <li ><a href="index_hard.html">にほんご</a></li>
             <li ><a href="index_en_hard.html">English</a></li>
 {{ end }}
           </ul>
@@ -83,8 +83,8 @@
 {{ end }}
           <ul class="dropdown-menu">
 {{ if eq (.Lang) ("ja") }}
-            <li ><a href="index.html">普通</a></li>
-            <li ><a href="index_hard.html">難しい</a></li>
+            <li ><a href="index.html">ふつう</a></li>
+            <li ><a href="index_hard.html">むずかしい</a></li>
 {{ end }}
 {{ if eq (.Lang) ("en") }}
             <li ><a href="index_en.html">Normal</a></li>
@@ -107,13 +107,13 @@
 {{ if eq (.Lang) ("ja") }}
 <div class="row">
 <div class="col-xs-3">
-<button onclick="runCode()" id="runButton" class="btn btn-primary btn-block">実行</button>
+<button onclick="runCode()" id="runButton" class="btn btn-primary btn-block">はじめる</button>
 </div>
 <div class="col-xs-3">
-<button onclick="stopCode()" id="stopButton" class="btn btn-danger btn-block">停止</button>
+<button onclick="stopCode()" id="stopButton" class="btn btn-danger btn-block">とめる</button>
 </div>
 <div class="col-xs-3">
-<button onclick="clearCode()" id="clearButton" class="btn btn-danger btn-block">削除</button>
+<button onclick="clearCode()" id="clearButton" class="btn btn-danger btn-block">けす</button>
 </div>
 </div>
 {{ end }}
