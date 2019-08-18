@@ -57,6 +57,7 @@ Blockly.Blocks['webapi_forward'] = {
           "type": "field_dropdown",
           "name": "option",
           "options": [
+              ["1", "1"],
               ["2", "2"],
               ["3", "3"],
               ["4", "4"],
@@ -128,6 +129,7 @@ Blockly.Blocks['webapi_back'] = {
           "type": "field_dropdown",
           "name": "option",
           "options": [
+              ["1", "1"],
               ["2", "2"],
               ["3", "3"],
               ["4", "4"],
