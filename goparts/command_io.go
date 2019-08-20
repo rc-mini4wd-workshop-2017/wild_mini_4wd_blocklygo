@@ -38,13 +38,13 @@ func openCommandIO(device string, name string) (*CommandIO, error) {
 }
 
 // Open bluetooth command IO
-func OpenBluetoothCommandIO() (*CommandIO, error) {
-	return openCommandIO("/dev/rfcomm0", "bluetooth")
+func OpenBluetoothCommandIO(device string) (*CommandIO, error) {
+	return openCommandIO(device, "bluetooth")
 }
 
 // Open serial command IO
-func OpenSerialCommandIO() (*CommandIO, error) {
-	return openCommandIO("/dev/ttyUSB0", "serial")
+func OpenSerialCommandIO(device string) (*CommandIO, error) {
+	return openCommandIO(device, "serial")
 }
 
 func (c *CommandIO) discardReadBuffer() error {

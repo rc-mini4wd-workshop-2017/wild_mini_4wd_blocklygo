@@ -26,7 +26,16 @@ func ExecLongtimeCommand(w http.ResponseWriter, command string, timeout time.Dur
 	mutex.Lock()
 	defer mutex.Unlock()
 
-	serialCommand, err := OpenSerialCommandIO()
+	config, err := ReadConfig("config.json")
+	if err != nil {
+		fmt.Println("error: open command io")
+		err = errors.New("open command io")
+		fmt.Fprintf(w, "result: -1\n")
+		fmt.Fprintf(w, "error: %s\n", err)
+		return 0, "", err
+	}
+
+	serialCommand, err := OpenSerialCommandIO(config.Serial)
 	if err == nil {
 		fmt.Println("success: open serial")
 		result, body, err := serialCommand.Execute(command, timeout)
@@ -42,7 +51,7 @@ func ExecLongtimeCommand(w http.ResponseWriter, command string, timeout time.Dur
 		return result, body, err
 	}
 
-	serialCommand, err = OpenBluetoothCommandIO()
+	serialCommand, err = OpenBluetoothCommandIO(config.Bluetooth)
 	if err == nil {
 		fmt.Println("success: open bluetooth")
 		result, body, err := serialCommand.Execute(command, timeout)

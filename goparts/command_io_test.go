@@ -40,7 +40,7 @@ func initialize() error {
 
 func initializeSerial() error {
 	var err error
-	testSerialCommand, err = OpenSerialCommandIO()
+	testSerialCommand, err = OpenSerialCommandIO("/dev/ttyUSB0")
 	if err != nil {
 		fmt.Println("error: open serial")
 	}
@@ -49,7 +49,7 @@ func initializeSerial() error {
 
 func initializeBluetooth() error {
 	var err error
-	testSerialCommand, err = OpenBluetoothCommandIO()
+	testSerialCommand, err = OpenBluetoothCommandIO("/dev/rfcomm0")
 	if err != nil {
 		fmt.Println("error: open bluetooth")
 	}

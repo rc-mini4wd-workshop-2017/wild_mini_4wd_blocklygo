@@ -1,0 +1,4 @@
+{
+    "bluetooth": "/dev/rfcomm0",
+    "serial": "/dev/ttyUSB0"
+}
