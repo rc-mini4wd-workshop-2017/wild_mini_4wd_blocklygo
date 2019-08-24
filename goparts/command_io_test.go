@@ -35,7 +35,6 @@ func initialize() error {
 		message := "unknown TEST_IO_MODE: " + mode
 		return errors.New(message)
 	}
-	return nil
 }
 
 func initializeSerial() error {
