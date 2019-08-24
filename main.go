@@ -5,10 +5,10 @@
 package main
 
 import (
-	"./goparts"
 	"github.com/julienschmidt/httprouter"
 	"log"
 	"net/http"
+	"z/goparts"
 )
 
 func main() {
