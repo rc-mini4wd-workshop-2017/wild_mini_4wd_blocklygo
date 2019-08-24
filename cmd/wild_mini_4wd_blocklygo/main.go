@@ -8,12 +8,27 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"log"
 	"net/http"
-	"z/goparts"
+	"sync"
+	"text/template"
+	"wm4b"
 )
 
-func main() {
-	goparts.Initialize()
+type templateHandler struct {
+	once     sync.Once
+	filename string
+	Lang     string
+	Mode     string
+	templ    *template.Template
+}
 
+func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	t.once.Do(func() {
+		t.templ = template.Must(template.ParseFiles(t.filename))
+	})
+	t.templ.Execute(w, t)
+}
+
+func main() {
 	router := httprouter.New()
 	router.Handler("GET", "/",
 		&templateHandler{filename: "index.html", Lang: "ja", Mode: "normal"})
@@ -26,23 +41,21 @@ func main() {
 	router.Handler("GET", "/index_en_hard.html",
 		&templateHandler{filename: "index.html", Lang: "en", Mode: "hard"})
 	router.ServeFiles("/static/*filepath", http.Dir("static"))
-	router.PUT("/v1/info", goparts.Info)
-	router.PUT("/v1/go_forward/:speed", goparts.GoForward)
-	router.PUT("/v1/forward/:speed/:option", goparts.Forward)
-	router.PUT("/v1/go_back/:speed", goparts.GoBack)
-	router.PUT("/v1/back/:speed/:option", goparts.Back)
-	router.PUT("/v1/stop", goparts.Stop)
-	router.PUT("/v1/drive/:speed/:distance", goparts.Drive)
-	router.PUT("/v1/turnfront", goparts.Front)
-	router.PUT("/v1/turnleft", goparts.Left)
-	router.PUT("/v1/turnright", goparts.Right)
-	router.PUT("/v1/servo/:command", goparts.Servo)
-	router.PUT("/v1/irgun", goparts.IrGun)
-	router.PUT("/v1/distance", goparts.Distance)
+	router.PUT("/v1/info", wm4b.Info)
+	router.PUT("/v1/go_forward/:speed", wm4b.GoForward)
+	router.PUT("/v1/forward/:speed/:option", wm4b.Forward)
+	router.PUT("/v1/go_back/:speed", wm4b.GoBack)
+	router.PUT("/v1/back/:speed/:option", wm4b.Back)
+	router.PUT("/v1/stop", wm4b.Stop)
+	router.PUT("/v1/drive/:speed/:distance", wm4b.Drive)
+	router.PUT("/v1/turnfront", wm4b.Front)
+	router.PUT("/v1/turnleft", wm4b.Left)
+	router.PUT("/v1/turnright", wm4b.Right)
+	router.PUT("/v1/servo/:command", wm4b.Servo)
+	router.PUT("/v1/irgun", wm4b.IrGun)
+	router.PUT("/v1/distance", wm4b.Distance)
 	log.Print("Server Start..")
 	port := ":8080"
 	log.Fatalf("listen serve error[%s]: %v\n", port, http.ListenAndServe(port, router))
 	log.Print("Server Finished.")
-
-	goparts.Finalize()
 }

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
-package goparts
+package wm4b
 
 import (
 	"errors"
@@ -12,15 +12,12 @@ import (
 	"time"
 )
 
-func Initialize() {
-}
-func Finalize() {
-}
-
+// ExecCommand executes a command from WebAPI
 func ExecCommand(w http.ResponseWriter, command string) (int, string, error) {
 	return ExecLongtimeCommand(w, command, 3*time.Second)
 }
 
+// ExecLongtimeCommand executes a command from WebAPI
 func ExecLongtimeCommand(w http.ResponseWriter, command string, timeout time.Duration) (int, string, error) {
 	var mutex sync.Mutex
 	mutex.Lock()

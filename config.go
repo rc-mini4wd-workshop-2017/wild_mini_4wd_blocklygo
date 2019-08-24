@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
-package goparts
+package wm4b
 
 import (
 	"encoding/json"
@@ -11,6 +11,7 @@ import (
 	"os"
 )
 
+// Config for json config
 type Config struct {
 	Bluetooth string `json:"bluetooth"`
 	Serial    string `json:"serial"`
@@ -32,6 +33,7 @@ func readAll(fp *os.File) []byte {
 	return bs
 }
 
+// ReadConfig read a config file
 func ReadConfig(filepath string) (*Config, error) {
 	file := openFile(filepath)
 	blob := readAll(file)

@@ -1,4 +1,4 @@
-module z
+module wm4b
 
 go 1.13
 

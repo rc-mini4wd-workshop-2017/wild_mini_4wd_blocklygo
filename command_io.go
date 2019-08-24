@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
-package goparts
+package wm4b
 
 import (
 	"errors"
@@ -14,9 +14,10 @@ import (
 )
 
 const (
-	discard_timeout = time.Millisecond * 10
+	discardTimeout = time.Millisecond * 10
 )
 
+// CommandIO for serial or bluetooth
 type CommandIO struct {
 	port *serial.Port
 	line *ReadlineChannel
@@ -37,12 +38,12 @@ func openCommandIO(device string, name string) (*CommandIO, error) {
 	return command, nil
 }
 
-// Open bluetooth command IO
+// OpenBluetoothCommandIO opens bluetooth command IO
 func OpenBluetoothCommandIO(device string) (*CommandIO, error) {
 	return openCommandIO(device, "bluetooth")
 }
 
-// Open serial command IO
+// OpenSerialCommandIO opens serial command IO
 func OpenSerialCommandIO(device string) (*CommandIO, error) {
 	return openCommandIO(device, "serial")
 }
@@ -53,7 +54,7 @@ func (c *CommandIO) discardReadBuffer() error {
 		case <-c.line.C:
 		case <-c.line.Err:
 			return nil
-		case <-time.After(discard_timeout):
+		case <-time.After(discardTimeout):
 			return errors.New("Timeout")
 		}
 	}

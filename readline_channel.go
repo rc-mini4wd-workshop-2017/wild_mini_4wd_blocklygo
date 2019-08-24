@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
-package goparts
+package wm4b
 
 import (
 	"bufio"
@@ -10,11 +10,13 @@ import (
 	"log"
 )
 
+// ReadlineChannel is a string channel from read lines
 type ReadlineChannel struct {
 	C   chan string
 	Err chan error
 }
 
+// NewReadlineChannel creates ReadlineChannel instance
 func NewReadlineChannel(reader io.Reader, title string) *ReadlineChannel {
 	bufreader := bufio.NewReaderSize(reader, 1024)
 	cline := make(chan string)

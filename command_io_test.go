@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
-package goparts
+package wm4b
 
 import (
 	"errors"
@@ -113,7 +113,7 @@ func testLongTimeCommand(t *testing.T, command string, timeout time.Duration) {
 // Timeout Test:
 //   $ env TEST_IO_MODE=bluetooth go test -timeout 60m -count 10000 -run "TestInfoCommand"
 //   PASS
-//   ok      _/home/pi/workspace/wild_mini_4wd_blocklygo/goparts     1787.138s
+//   ok      _/home/pi/workspace/wm4b     1787.138s
 //
 func TestInfoCommand(t *testing.T) {
 	testNormalCommand(t, "info")
