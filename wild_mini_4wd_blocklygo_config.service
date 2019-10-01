@@ -1,6 +1,7 @@
 [Unit]
 Description=Copy user config.json for wild_mini_4wd_blocklygo
 ConditionPathExists=/boot/wild_mini_4wd_blocklygo_config.json
+Before=wild_mini_4wd_blocklygo.service
 
 [Service]
 Type=oneshot
