@@ -1,0 +1,11 @@
+[Unit]
+Description=Copy user config.json for wild_mini_4wd_blocklygo
+ConditionPathExists=/boot/wild_mini_4wd_blocklygo_config.json
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/cp -f /boot/wild_mini_4wd_blocklygo_config.json /home/pi/workspace/wild_mini_4wd_blocklygo/config.json
+
+[Install]
+WantedBy=multi-user.target

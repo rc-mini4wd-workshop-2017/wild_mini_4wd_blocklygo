@@ -12,6 +12,8 @@ $ GO111MODULE=off go build
 ```
 $ go get github.com/julienschmidt/httprouter
 $ cp chromium.desktop ~/.config/autostart/
+$ sudo cp wild_mini_4wd_blocklygo_config.service /etc/systemd/system/
+$ sudo systemctl enable wild_mini_4wd_blocklygo_config.service
 $ sudo cp wild_mini_4wd_blocklygo.service /etc/systemd/system/
 $ sudo systemctl enable wild_mini_4wd_blocklygo.service
 $ sudo reboot
