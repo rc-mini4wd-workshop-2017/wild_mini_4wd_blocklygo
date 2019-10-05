@@ -56,6 +56,6 @@ func main() {
 	router.PUT("/v1/distance", wm4b.Distance)
 	port := ":8080"
 	log.Printf("Server Start.. http://localhost%s", port)
-	log.Fatalf("listen serve error[%s]: %v\n", port, http.ListenAndServe(port, router))
+	log.Fatalf("listen serve error[%s]: %v", port, http.ListenAndServe(port, router))
 	log.Print("Server Finished.")
 }
