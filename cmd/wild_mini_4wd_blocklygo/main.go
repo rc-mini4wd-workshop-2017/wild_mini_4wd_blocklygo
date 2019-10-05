@@ -31,16 +31,16 @@ func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func main() {
 	router := httprouter.New()
 	router.Handler("GET", "/",
-		&templateHandler{filename: "index.html", Lang: "ja", Mode: "normal"})
+		&templateHandler{filename: "public/index.html", Lang: "ja", Mode: "normal"})
 	router.Handler("GET", "/index.html",
-		&templateHandler{filename: "index.html", Lang: "ja", Mode: "normal"})
+		&templateHandler{filename: "public/index.html", Lang: "ja", Mode: "normal"})
 	router.Handler("GET", "/index_en.html",
-		&templateHandler{filename: "index.html", Lang: "en", Mode: "normal"})
+		&templateHandler{filename: "public/index.html", Lang: "en", Mode: "normal"})
 	router.Handler("GET", "/index_hard.html",
-		&templateHandler{filename: "index.html", Lang: "ja", Mode: "hard"})
+		&templateHandler{filename: "public/index.html", Lang: "ja", Mode: "hard"})
 	router.Handler("GET", "/index_en_hard.html",
-		&templateHandler{filename: "index.html", Lang: "en", Mode: "hard"})
-	router.ServeFiles("/static/*filepath", http.Dir("static"))
+		&templateHandler{filename: "public/index.html", Lang: "en", Mode: "hard"})
+	router.ServeFiles("/static/*filepath", http.Dir("public/static"))
 	router.PUT("/v1/info", wm4b.Info)
 	router.PUT("/v1/go_forward/:speed", wm4b.GoForward)
 	router.PUT("/v1/forward/:speed/:option", wm4b.Forward)
