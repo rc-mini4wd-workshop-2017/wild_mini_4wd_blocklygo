@@ -23,6 +23,7 @@ func ExecLongtimeCommand(w http.ResponseWriter, command string, timeout time.Dur
 	mutex.Lock()
 	defer mutex.Unlock()
 
+	fmt.Printf("ExecLongtimeCommand command=%s\n", command)
 	config, err := ReadConfig("config.json")
 	if err != nil {
 		fmt.Println("error: open command io")

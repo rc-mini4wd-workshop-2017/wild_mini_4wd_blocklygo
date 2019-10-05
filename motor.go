@@ -5,42 +5,49 @@
 package wm4b
 
 import (
+	"fmt"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
+	"strconv"
 	"time"
 )
 
-const (
-	forwardSpeedSlow   = "61"
-	forwardSpeedNormal = "81"
-	forwardSpeedHigh   = "101"
-	backSpeedSlow      = "62"
-	backSpeedNormal    = "82"
-	backSpeedHigh      = "102"
-)
-
 func getForwardSpeedString(ps httprouter.Params) string {
+	config, err := ReadConfig("config.json")
+	if err != nil {
+		fmt.Println("error: open config.json")
+		return ""
+	}
+
+	speed := config.WebapiForwardNormalSpeed
 	switch ps.ByName("speed") {
 	case "slow":
-		return forwardSpeedSlow
+		speed = config.WebapiForwardSlowSpeed
 	case "normal":
-		return forwardSpeedNormal
+		speed = config.WebapiForwardNormalSpeed
 	case "high":
-		return forwardSpeedHigh
+		speed = config.WebapiForwardHighSpeed
 	}
-	return forwardSpeedNormal
+	return strconv.Itoa(speed)
 }
 
 func getBackSpeedString(ps httprouter.Params) string {
+	config, err := ReadConfig("config.json")
+	if err != nil {
+		fmt.Println("error: open config.json")
+		return ""
+	}
+
+	speed := config.WebapiBackNormalSpeed
 	switch ps.ByName("speed") {
 	case "slow":
-		return backSpeedSlow
+		speed = config.WebapiBackSlowSpeed
 	case "normal":
-		return backSpeedNormal
+		speed = config.WebapiBackNormalSpeed
 	case "high":
-		return backSpeedHigh
+		speed = config.WebapiBackHighSpeed
 	}
-	return backSpeedNormal
+	return strconv.Itoa(speed)
 }
 
 // GoForward executes "set_motor" command

@@ -13,8 +13,17 @@ import (
 
 // Config for json config
 type Config struct {
-	Bluetooth string `json:"bluetooth"`
-	Serial    string `json:"serial"`
+	WebapiForwardSlowSpeed   int    `json:"webapi_forward_slow_speed"`
+	WebapiForwardNormalSpeed int    `json:"webapi_forward_normal_speed"`
+	WebapiForwardHighSpeed   int    `json:"webapi_forward_high_speed"`
+	WebapiBackSlowSpeed      int    `json:"webapi_back_slow_speed"`
+	WebapiBackNormalSpeed    int    `json:"webapi_back_normal_speed"`
+	WebapiBackHighSpeed      int    `json:"webapi_back_high_speed"`
+	WebapiRotationAngle      int    `json:"webapi_rotation_angle"`
+	WebapiRightAngle         int    `json:"webapi_right_angle"`
+	WebapiLeftAngle          int    `json:"webapi_left_angle"`
+	Bluetooth                string `json:"bluetooth"`
+	Serial                   string `json:"serial"`
 }
 
 func openFile(filename string) *os.File {

@@ -1,4 +1,13 @@
 {
+    "webapi_forward_slow_speed":   61,
+    "webapi_forward_normal_speed": 81,
+    "webapi_forward_high_speed":   101,
+    "webapi_back_slow_speed":      62,
+    "webapi_back_normal_speed":    82,
+    "webapi_back_high_speed":      102,
+    "webapi_rotation_angle":       5,
+    "webapi_right_angle":          105,
+    "webapi_left_angle":           80,
     "bluetooth": "/dev/rfcomm0",
-    "serial": "/dev/ttyUSB0"
+    "serial":    "/dev/ttyUSB0"
 }
